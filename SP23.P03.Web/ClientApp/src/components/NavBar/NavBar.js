@@ -8,11 +8,18 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import './NavBar.css';
 import train from './train.svg';
 import {useState} from 'react';
+import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
+import TrainStations from '../../pages/TrainStations';
+import TrainRoutes from '../../pages/TrainRoutes';
+import Trips from '../../pages/Trips';
+import Tickets from '../../pages/Tickets';
+import Home from '../../pages/Home';
 function NavBar() {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     return (
+      <Router>
         <Navbar className="main" sticky="top">
         <Container>
           <Navbar.Brand href="#"> 
@@ -30,10 +37,10 @@ function NavBar() {
           </Offcanvas.Header>
           <Offcanvas.Body>
             <Nav style={{fontSize: '30px'}}>
-              <Nav.Link>Train Stations</Nav.Link>
-              <Nav.Link>Routes</Nav.Link>
-              <Nav.Link>Trips</Nav.Link>
-              <Nav.Link>Tickets</Nav.Link>
+              <Nav.Link as={Link} to={"/trainstations"}>Train Stations</Nav.Link>
+              <Nav.Link as={Link} to={"/routes"}>Routes</Nav.Link>
+              <Nav.Link as={Link} to={"/trips"}>Trips</Nav.Link>
+              <Nav.Link as={Link} to={"/tickets"}>Tickets</Nav.Link>
             </Nav>
           </Offcanvas.Body>
           </Offcanvas>
@@ -52,6 +59,16 @@ function NavBar() {
           </Form>
         </Container>
       </Navbar>
+      <div>
+       <Routes>
+        <Route path="/trainstations" element={<TrainStations />}/>
+        <Route path="/routes" element={<TrainRoutes />}/>
+        <Route path="/trips" element={<Trips />}/>
+        <Route path="/tickets" element={<Tickets />}/>
+        <Route path="/" element={<Home />}/>
+       </Routes>
+      </div>
+    </Router>
     );
 }
 
