@@ -32,11 +32,11 @@ function NavBar() {
             />
           </Navbar.Brand>
           <Offcanvas show={show} onHide={handleClose}>
-          <Offcanvas.Header closeButton>
+          <Offcanvas.Header closeButton style={{backgroundColor: '#d8b4fe'}}>
             <Offcanvas.Title><b>Menu</b></Offcanvas.Title>
           </Offcanvas.Header>
-          <Offcanvas.Body>
-            <Nav style={{fontSize: '30px'}}>
+          <Offcanvas.Body style={{backgroundColor: '#f2e6ff'}}>
+            <Nav style={{fontSize: '30px'}} onClick={handleClose}>
               <Nav.Link as={Link} to={"/trainstations"}>Train Stations</Nav.Link>
               <Nav.Link as={Link} to={"/routes"}>Routes</Nav.Link>
               <Nav.Link as={Link} to={"/trips"}>Trips</Nav.Link>
@@ -45,7 +45,7 @@ function NavBar() {
           </Offcanvas.Body>
           </Offcanvas>
           <Navbar.Brand>
-            <i style={{color: 'white', fontSize: '50px', fontFamily: "'Nunito', sans-serif"}}>EnTrack</i>
+            <Nav.Link as={Link} to={"/"}><i style={{color: 'white', fontSize: '50px', fontFamily: "'Nunito', sans-serif"}}>EnTrack</i></Nav.Link>
           </Navbar.Brand>
           <Nav className="me-auto"/>
           <Form className="d-flex">

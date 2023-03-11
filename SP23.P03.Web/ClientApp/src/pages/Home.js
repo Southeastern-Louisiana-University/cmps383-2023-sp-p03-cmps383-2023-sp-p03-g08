@@ -1,8 +1,11 @@
 import React from "react";
+import { Container } from "react-bootstrap";
 
 function Home() {
     return (
-        <h1>Welcome to Entrack!</h1>
+       <Container className="text-center">
+            <h1>Welcome to EnTrack!</h1>
+       </Container>
     );
 }
 

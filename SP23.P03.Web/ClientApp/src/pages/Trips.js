@@ -1,8 +1,10 @@
 import React from "react";
-
+import { Container } from "react-bootstrap";
 function Trips() {
     return (
-        <div>Trips</div>
+        <Container className="text-center">
+            <h1>Trips</h1>
+        </Container>
     );
 }
 
