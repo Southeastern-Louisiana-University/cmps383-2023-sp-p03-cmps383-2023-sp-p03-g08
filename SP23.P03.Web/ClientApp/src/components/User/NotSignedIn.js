@@ -5,7 +5,6 @@ import Tooltip from "react-bootstrap/Tooltip";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
-import Nav from "react-bootstrap/Nav";
 import Form from "react-bootstrap/Form";
 
 function NotSignedIn() {
@@ -40,10 +39,8 @@ function NotSignedIn() {
           <Button variant="success" onClick={handleClose}>Submit</Button>
         </Modal.Footer>
       </Modal>
-        <OverlayTrigger placement="bottom" delay={{ show: 250, hide: 400 }} overlay={toolTip}>
-            <Nav.Link>
-                <Image src={notsignedin} onClick={handleShow}/>
-            </Nav.Link>
+        <OverlayTrigger placement="left" delay={{ show: 250, hide: 400 }} overlay={toolTip}>
+          <Image src={notsignedin} onClick={handleShow} style={{cursor: 'pointer'}}/>
         </OverlayTrigger>
       </div>
     );

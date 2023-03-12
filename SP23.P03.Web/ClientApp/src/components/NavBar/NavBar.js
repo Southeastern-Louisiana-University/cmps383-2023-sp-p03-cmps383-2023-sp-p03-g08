@@ -7,6 +7,7 @@ import Nav from 'react-bootstrap/Nav';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import './NavBar.css';
 import train from './train.svg';
+import magnifyingglass from './search.svg';
 import {useState} from 'react';
 import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
 import TrainStations from '../../pages/TrainStations';
@@ -17,6 +18,8 @@ import Home from '../../pages/Home';
 import Profile from '../../pages/Profile';
 import SignedIn from '../User/SignedIn';
 import NotSignedIn from '../User/NotSignedIn';
+import NotFound from '../../pages/NotFound';
+
 function NavBar() {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -34,7 +37,7 @@ function NavBar() {
       <Router>
         <Navbar className="main" sticky="top">
         <Container>
-          <Navbar.Brand href="#"> 
+          <Navbar.Brand style={{cursor: 'pointer'}}> 
             <img onClick={handleShow}
               alt="a train"
               src={train}
@@ -60,15 +63,18 @@ function NavBar() {
             <Nav.Link as={Link} to={"/"}><i style={{color: 'white', fontSize: '50px', fontFamily: "'Nunito', sans-serif"}}>EnTrack</i></Nav.Link>
           </Navbar.Brand>
           <Nav className="me-auto"/>
+          <img src={magnifyingglass} alt="magnifyingglass" className="me-3"/>
           <Form className="d-flex">
             <Form.Control
               type="search"
-              placeholder="Search"
+              placeholder="Looking for..."
               className="me-2"
               aria-label="Search"
             />
             <Button variant="light">Search</Button>
           </Form>
+          <Nav className="me-auto"/*Somehow these (almost) center the search bar?*//>  
+          <Nav className="me-auto"/>
           <div>
               {userComponent}
           </div>
@@ -82,6 +88,7 @@ function NavBar() {
         <Route path="/tickets" element={<Tickets />}/>
         <Route path="/profile" element={<Profile />}/>
         <Route path="/" element={<Home />}/>
+        <Route path="*" element={<NotFound />} /*this route must be last*//>
        </Routes>
       </div>
     </Router>

@@ -12,7 +12,7 @@ function SignedIn() {
         </Tooltip>
     );
     return (
-        <OverlayTrigger placement="bottom" delay={{ show: 250, hide: 400 }} overlay={toolTip}>
+        <OverlayTrigger placement="left" delay={{ show: 250, hide: 400 }} overlay={toolTip}>
         <Nav.Link as={Link} to={"/profile"}>
             <Image src={signedin}/>
         </Nav.Link>
