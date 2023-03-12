@@ -14,10 +14,22 @@ import TrainRoutes from '../../pages/TrainRoutes';
 import Trips from '../../pages/Trips';
 import Tickets from '../../pages/Tickets';
 import Home from '../../pages/Home';
+import Profile from '../../pages/Profile';
+import SignedIn from '../User/SignedIn';
+import NotSignedIn from '../User/NotSignedIn';
 function NavBar() {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    let userComponent; //test code, actually want to render based on backend authentication eventually
+    let isLoggedIn = false;
+    if (isLoggedIn) {
+      userComponent = <SignedIn />
+    }
+    else {
+      userComponent = <NotSignedIn/>
+    }
     return (
       <Router>
         <Navbar className="main" sticky="top">
@@ -57,6 +69,9 @@ function NavBar() {
             />
             <Button variant="light">Search</Button>
           </Form>
+          <div>
+              {userComponent}
+          </div>
         </Container>
       </Navbar>
       <div>
@@ -65,6 +80,7 @@ function NavBar() {
         <Route path="/routes" element={<TrainRoutes />}/>
         <Route path="/trips" element={<Trips />}/>
         <Route path="/tickets" element={<Tickets />}/>
+        <Route path="/profile" element={<Profile />}/>
         <Route path="/" element={<Home />}/>
        </Routes>
       </div>
