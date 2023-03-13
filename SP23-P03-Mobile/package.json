@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "set EXPO_PACKAGER_PROXY_URL= expo start",
+    "start": "set EXPO_PACKAGER_PROXY_URL= https://a4e2-147-174-75-100.ngrok.io && expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web"
