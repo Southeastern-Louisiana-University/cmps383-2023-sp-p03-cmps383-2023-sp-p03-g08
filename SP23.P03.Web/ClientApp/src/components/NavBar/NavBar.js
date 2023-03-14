@@ -19,6 +19,7 @@ import Profile from '../../pages/Profile';
 import SignedIn from '../User/SignedIn';
 import NotSignedIn from '../User/NotSignedIn';
 import NotFound from '../../pages/NotFound';
+import Trains from '../../pages/Trains';
 
 function NavBar() {
     const [show, setShow] = useState(false);
@@ -33,6 +34,7 @@ function NavBar() {
     else {
       userComponent = <NotSignedIn/>
     }
+    
     return (
       <Router>
         <Navbar className="main" sticky="top">
@@ -56,6 +58,7 @@ function NavBar() {
               <Nav.Link as={Link} to={"/routes"}>Routes</Nav.Link>
               <Nav.Link as={Link} to={"/trips"}>Trips</Nav.Link>
               <Nav.Link as={Link} to={"/tickets"}>Tickets</Nav.Link>
+              <Nav.Link as={Link} to={"/trains"}>Trains</Nav.Link>
             </Nav>
           </Offcanvas.Body>
           </Offcanvas>
@@ -70,7 +73,15 @@ function NavBar() {
               placeholder="Looking for..."
               className="me-2"
               aria-label="Search"
+              list="options"
             />
+            <datalist id="options">
+              <option value={"Train Stations"}/>
+              <option value={"Routes"}/>
+              <option value={"Trips"}/>
+              <option value={"Tickets"}/>
+              <option value={"Trains"}/>
+            </datalist>
             <Button variant="light">Search</Button>
           </Form>
           <Nav className="me-auto"/*Somehow these (almost) center the search bar?*//>  
@@ -87,6 +98,7 @@ function NavBar() {
         <Route path="/trips" element={<Trips />}/>
         <Route path="/tickets" element={<Tickets />}/>
         <Route path="/profile" element={<Profile />}/>
+        <Route path="/trains" element={<Trains />}/>
         <Route path="/" element={<Home />}/>
         <Route path="*" element={<NotFound />} /*this route must be last*//>
        </Routes>
