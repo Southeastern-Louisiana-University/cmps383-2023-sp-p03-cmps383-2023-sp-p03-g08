@@ -7,7 +7,7 @@ function Placeholder() {
         <Container className="text-center">
             <br/>
             <div style={{opacity: 0.5}}>
-                <img src={train} style={{width: '400px', height: '400px'}}  alt="train"/><br/>
+                <img src={train} style={{width: '400px', height: '400px'}}/><br/>
                 <i style={{color: 'white', fontSize: '100px', fontFamily: "'Nunito', sans-serif"}}>EnTrack</i>
             </div>
         </Container>
