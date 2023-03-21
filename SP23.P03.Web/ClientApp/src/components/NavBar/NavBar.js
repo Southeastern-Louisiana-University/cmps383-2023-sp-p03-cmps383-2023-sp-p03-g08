@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 import Nav from 'react-bootstrap/Nav';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import './NavBar.css';
-import train from './train.svg';
+import burger from './hamburger.svg';
 import magnifyingglass from './search.svg';
 import {useState} from 'react';
 import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
@@ -41,8 +41,8 @@ function NavBar() {
         <Container>
           <Navbar.Brand style={{cursor: 'pointer'}}> 
             <img onClick={handleShow}
-              alt="a train"
-              src={train}
+              alt="a burger"
+              src={burger}
               width="50"
               height="50"
               className="d-inline-block align-center"
