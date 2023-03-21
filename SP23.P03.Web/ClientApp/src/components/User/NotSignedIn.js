@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Image } from "react-bootstrap";
-import notsignedin from './notsignedin.svg';
+import person from './person.svg'
 import Tooltip from "react-bootstrap/Tooltip";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Modal from "react-bootstrap/Modal";
@@ -40,7 +40,7 @@ function NotSignedIn() {
         </Modal.Footer>
       </Modal>
         <OverlayTrigger placement="left" delay={{ show: 250, hide: 400 }} overlay={toolTip}>
-          <Image src={notsignedin} onClick={handleShow} style={{cursor: 'pointer'}}/>
+          <Image src={person} onClick={handleShow} style={{cursor: 'pointer'}}/>
         </OverlayTrigger>
       </div>
     );
