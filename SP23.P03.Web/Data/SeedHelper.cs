@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SP23.P03.Web.Features.Authorization;
 using SP23.P03.Web.Features.TrainStations;
+using SP23.P03.Web.Features.Trains;
+using Route = SP23.P03.Web.Features.Routes.Route;
 
 namespace SP23.P03.Web.Data;
 
@@ -17,6 +19,10 @@ public static class SeedHelper
         await AddUsers(serviceProvider);
 
         await AddTrainStation(dataContext);
+        await AddTrains(dataContext);
+        await AddRoutes(dataContext);
+        await AddRouteTrainStations(dataContext);
+
     }
 
     private static async Task AddUsers(IServiceProvider serviceProvider)
@@ -78,16 +84,80 @@ public static class SeedHelper
             return;
         }
 
-        for (int i = 0; i < 3; i++)
+        trainStations.Add(new TrainStation
         {
-            dataContext.Set<TrainStation>()
-                .Add(new TrainStation
-                {
-                    Name = "Hammond",
-                    Address = "1234 Place st"
-                });
-        }
+            Name = "Test 1",
+            Address = "1234 Place",
+            City = "Baton Rouge",
+            State = "LA"
+        });
+        trainStations.Add(new TrainStation
+        {
+            Name = "Test 2",
+            Address = "1234 Place",
+            City = "Hammond",
+            State = "LA"
+        });
+        trainStations.Add(new TrainStation
+        {
+            Name = "Test 3",
+            Address = "1234 Place",
+            City = "Slidell",
+            State = "LA"
+        });
+
 
         await dataContext.SaveChangesAsync();
     }
+    private static async Task AddTrains(DataContext dataContext)
+    {
+        var trains = dataContext.Set<Train>();
+        if (await trains.AnyAsync())
+        {
+            return;
+        }
+
+        trains.Add(new Train
+        {
+            Name = "EnTrack 1",
+            Capacity = 100
+        });
+        trains.Add(new Train
+        {
+            Name = "EnTrack 2",
+            Capacity = 50
+        });
+        await dataContext.SaveChangesAsync();
+    }
+    private static async Task AddRoutes(DataContext dataContext)
+    {
+        var routes = dataContext.Set<Route>();
+        if (await routes.AnyAsync())
+        {
+            return;
+        }
+
+        routes.Add(new Route
+        {
+            Name = "Test Route",
+            Description = "The test route",
+            Order = "Test 1, Test 2, Test 3"
+        });
+        await dataContext.SaveChangesAsync();
+    }
+    private static async Task AddRouteTrainStations(DataContext dataContext)
+    {
+        var routes = dataContext.Set<Route>();
+        var testroute = routes.First(x => x.Id == 1);
+
+        var trainStations = dataContext.Set<TrainStation>();
+        var ts1 = trainStations.First(x => x.Id == 1);
+        var ts2 = trainStations.First(x => x.Id == 2);
+        var ts3 = trainStations.First(x => x.Id == 3);
+
+        testroute.TrainStations.AddRange(new[] { ts1, ts2, ts3 });
+        dataContext.SaveChanges();
+
+    }
+
 }
