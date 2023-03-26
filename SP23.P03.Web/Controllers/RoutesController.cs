@@ -16,12 +16,14 @@ namespace SP23.P03.Web.Controllers;
 public class RoutesController : ControllerBase
 {
     private readonly DbSet<Route> routes;
+    private readonly DbSet<TrainStation> trainStations;
     private readonly DataContext dataContext;
 
     public RoutesController(DataContext dataContext)
     {
         this.dataContext = dataContext;
         routes = dataContext.Set<Route>();
+        trainStations = dataContext.Set<TrainStation>();
     }
 
     [HttpGet]
@@ -98,6 +100,31 @@ public class RoutesController : ControllerBase
             Order = routetoedit.Order
         };
         return Ok(returnroute);
+    }
+    [HttpPut("{routeid}/addstations")]
+    [Authorize(Roles = RoleNames.Admin)]
+    public ActionResult AddStationsToRoute(int routeid, int stationid) 
+    {
+        var routetoedit = routes.FirstOrDefault(x => x.Id == routeid);
+        if (routetoedit == null)
+        {
+            return NotFound();
+        }
+        var stationtoadd = trainStations.FirstOrDefault(x => x.Id == stationid);
+        if (stationtoadd == null)
+        {
+            return NotFound();
+        }
+        //make sure station isn't already in route (RouteTrainStation composite key would reject as well)
+        var stationinroute = routetoedit.TrainStations.Find(x => x.Id == stationtoadd.Id);
+        if (stationinroute != null) //this didn't catch the constraint? Try to find by name?
+        {
+            return BadRequest("Station already in the route.");
+        }
+        routetoedit.TrainStations.Add(stationtoadd);
+        dataContext.SaveChanges();
+        var resultofadd = GetRouteAndStationsDtos(routes.Where(x => x.Id == routetoedit.Id)).FirstOrDefault();
+        return Ok(resultofadd);
     }
 
     private bool IsInvalid(RouteDto dto)
