@@ -10,7 +10,7 @@ import burger from './hamburger.svg';
 import magnifyingglass from './search.svg';
 import {useState} from 'react';
 import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
-import TrainStations from '../../pages/TrainStations';
+import TrainStations from '../../pages/Stations/TrainStations';
 import TrainRoutes from '../../pages/TrainRoutes';
 import Trips from '../../pages/Trips';
 import Tickets from '../../pages/Tickets';

@@ -1,12 +1,12 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import Placeholder from "../components/Placeholder";
+import GetStations from "./GetStations";
 function TrainStations() {
     return (
-        <Container className="text-center">
+      <Container className="text-center">
             <h1>Train Stations</h1>
-            <Placeholder />
-        </Container>
+            <GetStations/>
+      </Container>
     );
 }
 
