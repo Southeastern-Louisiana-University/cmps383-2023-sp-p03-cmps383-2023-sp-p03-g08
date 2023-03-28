@@ -50,7 +50,9 @@ function NotSignedIn() {
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" placeholder="Enter Password" name="password"/>
                     </Form.Group>
-                <Button variant="success" type="submit" onClick={handleClose}>Submit</Button>
+                <div style={{textAlign: 'center'}}>
+                  <Button variant="success" type="submit" onClick={handleClose}>Submit</Button>
+                </div>
                 </Form>
         </Modal.Body>
       </Modal>

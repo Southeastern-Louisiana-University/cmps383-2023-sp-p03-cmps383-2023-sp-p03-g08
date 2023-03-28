@@ -66,7 +66,7 @@ app.UseSpa(spaBuilder =>
     spaBuilder.Options.SourcePath = "ClientApp";
     if (app.Environment.IsDevelopment())
     {
-        spaBuilder.UseProxyToSpaDevelopmentServer("https://localhost:7031/");
+        spaBuilder.UseProxyToSpaDevelopmentServer("https://localhost:3000/");
     }
 });
 

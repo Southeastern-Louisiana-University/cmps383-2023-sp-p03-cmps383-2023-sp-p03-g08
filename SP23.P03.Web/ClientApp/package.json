@@ -17,7 +17,7 @@
   },
   "scripts": {
     "preinstall": "node aspnetcore-react",
-    "start": "set PORT=7031 && react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
