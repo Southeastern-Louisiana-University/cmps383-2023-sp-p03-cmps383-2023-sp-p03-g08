@@ -7,13 +7,13 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 //Screens
 import HomeScreen from './screens/HomeScreen';
-import SettingsScreen from './screens/SettingsScreen';
+import BookingScreen from './screens/BookingScreen';
 import DetailsScreen from './screens/DetailsScreen';
 
 //Screen names
 const homeName = 'Home';
-const detailsName = 'Details';
-const settingName = 'Settings';
+const detailsName = 'Ticket Details';
+const bookingName = ' Ticket Booking';
 
 const Tab = createBottomTabNavigator();
 
@@ -31,8 +31,8 @@ export default function MainContainer() {
                             iconName = focused ? 'home' : 'home-outline';
                         } else if (rn === detailsName) {
                             iconName = focused ? 'list' : 'list-outline';
-                        } else if (rn === settingName) {
-                            iconName = focused ? 'settings' : 'settings-outline';
+                        } else if (rn === bookingName) {
+                            iconName = focused ? 'ticket' : 'ticket-outline';
                         }
                         return <Ionicons name={iconName} size={size} color={color} />;
                     },
@@ -47,7 +47,7 @@ export default function MainContainer() {
             >
 
                 <Tab.Screen name={homeName} component={HomeScreen} />
-                <Tab.Screen name={settingName} component={SettingsScreen} />
+                <Tab.Screen name={bookingName} component={BookingScreen} />
                 <Tab.Screen name={detailsName} component={DetailsScreen} />
 
 

@@ -1,22 +1,22 @@
-import React from "react";
+import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 
-export default function DetailsScreen({ navigation }) {
+export default function BookingScreen({ navigation }) {
     return (
         <View style={styles.container}>
-            <Text
-                onPress={() => navigation.navigate('Home')}
-                style={styles.baseText}>  Ticket Details Screen</Text>
-
+            <Text onPress={() => navigation.navigate('Home')} style={styles.baseText}>
+                Ticket Booking Screen
+            </Text>
         </View>
-    )
+    );
 }
+
 const styles = StyleSheet.create({
     baseText: {
         fontFamily: 'Nunito Sans',
         color: 'white',
         frontSize: 26,
-        frontWeight: 'bold'
+        frontWeight: 'bold',
     },
     container: {
         flex: 1,
