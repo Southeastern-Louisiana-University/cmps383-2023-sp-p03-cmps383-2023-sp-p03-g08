@@ -1,11 +1,11 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 
-export default function SettingsScreen({ navigation }) {
+export default function BookingScreen({ navigation }) {
     return (
         <View style={styles.container}>
             <Text onPress={() => navigation.navigate('Home')} style={styles.baseText}>
-                Settings Screen
+                Ticket Booking Screen
             </Text>
         </View>
     );

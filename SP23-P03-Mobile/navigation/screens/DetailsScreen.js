@@ -6,7 +6,7 @@ export default function DetailsScreen({ navigation }) {
         <View style={styles.container}>
             <Text
                 onPress={() => navigation.navigate('Home')}
-                style={styles.baseText}> Details Screen</Text>
+                style={styles.baseText}>  Ticket Details Screen</Text>
 
         </View>
     )
