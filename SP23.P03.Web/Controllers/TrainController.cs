@@ -12,7 +12,7 @@ namespace SP23.P03.Web.Controllers;
 
 public class TrainController : ControllerBase
 {
-    private readonly DbSet<Train> trains;
+    private readonly DbSet<Train> trains; 
     private readonly DataContext dataContext;
 
     public TrainController(DataContext dataContext)
