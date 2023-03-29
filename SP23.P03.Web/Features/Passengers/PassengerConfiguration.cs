@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace SP23.P03.Web.Features.Passengers
 {
-    public class PassengerConfiguration
+    public class PassengerConfiguration : IEntityTypeConfiguration<Passenger>
     {
         public void Configure(EntityTypeBuilder<Passenger> builder)
         {
@@ -19,7 +19,7 @@ namespace SP23.P03.Web.Features.Passengers
                    .IsRequired();
 
             builder.HasOne(x => x.Owner)
-                   .WithMany(x => x.OwnedPassengers)
+                   .WithMany(x => x.OwnedPassengers) //check
                    .HasForeignKey(x => x.OwnerId)
                    .IsRequired();
         }
