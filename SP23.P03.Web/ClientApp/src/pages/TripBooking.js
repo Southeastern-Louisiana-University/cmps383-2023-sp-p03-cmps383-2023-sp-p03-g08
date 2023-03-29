@@ -4,7 +4,7 @@ import Placeholder from "../components/Placeholder";
 function Tickets() {
     return (
         <Container className="text-center">
-            <h1>Tickets</h1>
+            <h1>Trip Booking</h1>
             <Placeholder />
         </Container>
     );
