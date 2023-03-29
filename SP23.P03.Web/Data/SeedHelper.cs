@@ -4,6 +4,7 @@ using SP23.P03.Web.Features.Authorization;
 using SP23.P03.Web.Features.TrainStations;
 using SP23.P03.Web.Features.Trains;
 using Route = SP23.P03.Web.Features.Routes.Route;
+using SP23.P03.Web.Features.RouteStations;
 
 namespace SP23.P03.Web.Data;
 
@@ -148,7 +149,7 @@ public static class SeedHelper
     
   /* private static async Task AddRouteTrainStations(DataContext dataContext)
     {
-        var routestations = dataContext.Set<RouteTrainStation>();
+        var routestations = dataContext.Set<RouteStation>();
         if (await routestations.AnyAsync())
         {
             return;
@@ -161,10 +162,11 @@ public static class SeedHelper
         var ts2 = trainStations.First(x => x.Name == "Test 2");
         var ts3 = trainStations.First(x => x.Name == "Test 3");
 
-        testroute.TrainStations.AddRange(new[] { ts1, ts2, ts3 });
+        // testroute.TrainStations.AddRange(new[] { ts1, ts2, ts3 });
+        //testroute.TrainStations.Add(ts1); can't do like before
         dataContext.SaveChanges();
-
-    }
-  */
+  
+    }*/
+  
 }
     
