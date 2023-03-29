@@ -1,12 +1,26 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 
 export default function HomeScreen({ navigation }) {
     return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <View style={styles.container}>
             <Text
                 onPress={() => alert('This is the "Home" screen.')}
-                style={{ frontSize: 26, frontWeight: 'bold' }}>Welcome to Entrack</Text>
+                style={styles.baseText}>Welcome to Entrack</Text>
         </View>
     );
 }
+const styles = StyleSheet.create({
+    baseText: {
+        fontFamily: 'Nunito Sans',
+        color: 'white',
+        frontSize: 26,
+        frontWeight: 'bold'
+    },
+    container: {
+        flex: 1,
+        backgroundColor: '#d8b4fe',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+});
