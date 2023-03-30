@@ -101,23 +101,23 @@ public class RoutesController : ControllerBase
         };
         return Ok(returnroute);
     }
-    [HttpPut("{routeid}/addstations")]
+    [HttpPut("{routeid}/addstations/{stationid}")]
     [Authorize(Roles = RoleNames.Admin)]
     public ActionResult AddStationsToRoute(int routeid, int stationid) 
     {
         var routetoedit = routes.FirstOrDefault(x => x.Id == routeid);
         if (routetoedit == null)
         {
-            return NotFound();
+            return NotFound("Route doesn't exist.");
         }
         var stationtoadd = trainStations.FirstOrDefault(x => x.Id == stationid);
         if (stationtoadd == null)
         {
-            return NotFound();
+            return NotFound("Station doesn't exist");
         }
-        //make sure station isn't already in route (RouteTrainStation composite key would reject as well)
-        var stationinroute = routetoedit.TrainStations.Find(x => x.Id == stationtoadd.Id);
-        if (stationinroute != null) //this didn't catch the constraint? Try to find by name?
+        //make sure station isn't already in route (RouteTrainStation composite key would reject as well, but catch the error)
+        var stationinroute = routetoedit.TrainStations.FirstOrDefault(x => x.Id == stationtoadd.Id); 
+        if (stationinroute == default) 
         {
             return BadRequest("Station already in the route.");
         }

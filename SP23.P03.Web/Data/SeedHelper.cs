@@ -163,8 +163,6 @@ public static class SeedHelper
 
         testroute.TrainStations.AddRange(new[] { ts1, ts2, ts3 }); 
         dataContext.SaveChanges();
-        //var ts1 = trainStations;
-        //testroute.TrainStations.Add(new RouteStation { TrainStationId = ts1.Id, RouteId = testroute.Id}); 
     }
 
 }
