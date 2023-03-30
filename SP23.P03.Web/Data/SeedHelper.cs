@@ -4,7 +4,6 @@ using SP23.P03.Web.Features.Authorization;
 using SP23.P03.Web.Features.TrainStations;
 using SP23.P03.Web.Features.Trains;
 using Route = SP23.P03.Web.Features.Routes.Route;
-using SP23.P03.Web.Features.RouteStations;
 
 namespace SP23.P03.Web.Data;
 
@@ -22,7 +21,7 @@ public static class SeedHelper
         await AddTrainStation(dataContext);
         await AddTrains(dataContext);
         await AddRoutes(dataContext);
-       // await AddRouteTrainStations(dataContext);
+        await AddRouteTrainStations(dataContext);
 
     }
 
@@ -147,26 +146,26 @@ public static class SeedHelper
         await dataContext.SaveChangesAsync();
     }
     
-  /* private static async Task AddRouteTrainStations(DataContext dataContext)
+    private static async Task AddRouteTrainStations(DataContext dataContext)
     {
-        var routestations = dataContext.Set<RouteStation>();
-        if (await routestations.AnyAsync())
+        var trainStations = dataContext.Set<TrainStation>();
+        if (trainStations.Any(x => x.Routes.Any())) //Any train stations that belong to any routes?
         {
             return;
         }
+
         var routes = dataContext.Set<Route>();
         var testroute = routes.First(x => x.Name == "Test Route");
-
-        var trainStations = dataContext.Set<TrainStation>();
+        
         var ts1 = trainStations.First(x => x.Name == "Test 1");
         var ts2 = trainStations.First(x => x.Name == "Test 2");
         var ts3 = trainStations.First(x => x.Name == "Test 3");
 
-        // testroute.TrainStations.AddRange(new[] { ts1, ts2, ts3 });
-        //testroute.TrainStations.Add(ts1); can't do like before
+        testroute.TrainStations.AddRange(new[] { ts1, ts2, ts3 }); 
         dataContext.SaveChanges();
-  
-    }*/
-  
+        //var ts1 = trainStations;
+        //testroute.TrainStations.Add(new RouteStation { TrainStationId = ts1.Id, RouteId = testroute.Id}); 
+    }
+
 }
     

@@ -1,5 +1,5 @@
 ﻿using SP23.P03.Web.Features.Authorization;
-using SP23.P03.Web.Features.RouteStations;
+using Route = SP23.P03.Web.Features.Routes.Route;
 
 namespace SP23.P03.Web.Features.TrainStations;
 
@@ -17,6 +17,6 @@ public class TrainStation
 
     public int? ManagerId { get; set; }
     public virtual User? Manager { get; set; }
-    public virtual ICollection<RouteStation> Routes { get; set; } = new List<RouteStation>();
+    public List<Route> Routes { get; set; } = new List<Route>();
     
 }
