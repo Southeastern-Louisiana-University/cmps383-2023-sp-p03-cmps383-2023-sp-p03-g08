@@ -21,6 +21,7 @@ import NotSignedIn from '../User/NotSignedIn';
 import NotFound from '../../pages/NotFound';
 import Trains from '../../pages/Trains';
 import AuthService from '../../services/AuthService';
+import Col from "react-bootstrap/Col";
 
 function NavBar() {
     const currentUser = AuthService.getCurrentUser();
@@ -38,57 +39,50 @@ function NavBar() {
     return (
       <Router>
         <Navbar className="main" sticky="top">
-        <Container>
-          <Navbar.Brand style={{cursor: 'pointer'}}> 
-            <img onClick={handleShow}
+          <Container>
+            <Col className="d-flex justify-content-start">
+            <img onClick={handleShow} style={{cursor: 'pointer', paddingRight: '17px'}}
               alt="a burger"
               src={burger}
-              width="50"
-              height="50"
-              className="d-inline-block align-center"
-            />
-          </Navbar.Brand>
-          <Offcanvas show={show} onHide={handleClose}>
-          <Offcanvas.Header closeButton style={{backgroundColor: '#d8b4fe'}}>
-            <Offcanvas.Title><b>Menu</b></Offcanvas.Title>
-          </Offcanvas.Header>
-          <Offcanvas.Body style={{backgroundColor: '#f2e6ff'}}>
-            <Nav style={{fontSize: '30px'}} onClick={handleClose}>
-            <Nav.Link as={Link} to={"/tripbooking"}><b>Book a Trip</b></Nav.Link>
-              <Nav.Link as={Link} to={"/trainstations"}>Train Stations</Nav.Link>
-              <Nav.Link as={Link} to={"/routes"}>Routes</Nav.Link>
-              <Nav.Link as={Link} to={"/trips"}>Trips</Nav.Link>
-              <Nav.Link as={Link} to={"/trains"}>Trains</Nav.Link>
-            </Nav>
-          </Offcanvas.Body>
-          </Offcanvas>
-          <Navbar.Brand>
+             />
+            <Navbar.Brand>
             <Nav.Link as={Link} to={"/"}><i style={{color: 'white', fontSize: '50px', fontFamily: "'Nunito', sans-serif"}}>EnTrack</i></Nav.Link>
-          </Navbar.Brand>
-          <Navbar.Brand> 
-            <img
-              alt="a train"
-              src={train}
-              width="45"
-              height="45"
-            />
-          </Navbar.Brand>
-          <Nav className="me-auto"/>
-          <Nav.Link as={Link} to={"/tripbooking"}>
-          <Button variant="warning" size="lg" style={{color: 'white'}}>
-            <img src={ticket} alt="a ticket" style={{marginRight: '10px'}}/>
-            Book a Trip
-          </Button>
-          </Nav.Link>
-          <Nav className="me-auto"/*Somehow these (almost) center*//>  
-          <Nav className="me-auto"/>
-          <Nav className="me-auto"/>
-          <div>
-              {userComponent}
-          </div>
-        </Container>
-      </Navbar>
-      <div>
+            </Navbar.Brand>
+                <img
+                  alt="a train"
+                  src={train}
+                /> 
+            <Offcanvas show={show} onHide={handleClose}>
+              <Offcanvas.Header closeButton style={{backgroundColor: '#d8b4fe'}}>
+                <Offcanvas.Title><b>Menu</b></Offcanvas.Title>
+              </Offcanvas.Header>
+              <Offcanvas.Body style={{backgroundColor: '#f2e6ff'}}>
+                <Nav style={{fontSize: '30px'}} onClick={handleClose}>
+                <Nav.Link as={Link} to={"/tripbooking"}><b>Book a Trip</b></Nav.Link>
+                <Nav.Link as={Link} to={"/trainstations"}>Train Stations</Nav.Link>
+                <Nav.Link as={Link} to={"/routes"}>Routes</Nav.Link>
+                <Nav.Link as={Link} to={"/trips"}>Trips</Nav.Link>
+                <Nav.Link as={Link} to={"/trains"}>Trains</Nav.Link>
+                </Nav>
+              </Offcanvas.Body>
+            </Offcanvas>
+            </Col>
+            <Col className="d-flex justify-content-center">
+              <Nav.Link as={Link} to={"/tripbooking"}>
+              <Button variant="warning" size="lg" style={{color: 'white'}}>
+              <img src={ticket} alt="a ticket" style={{marginRight: '10px'}}/>
+              Book a Trip
+              </Button>
+              </Nav.Link>
+            </Col>
+            <Col className="d-flex justify-content-end">
+              <div>
+                {userComponent}
+              </div>
+            </Col>
+          
+          </Container>
+          </Navbar>
        <Routes>
         <Route path="/trainstations" element={<TrainStations />}/>
         <Route path="/routes" element={<TrainRoutes />}/>
@@ -99,7 +93,6 @@ function NavBar() {
         <Route path="/" element={<Home />}/>
         <Route path="*" element={<NotFound />} /*this route must be last*//>
        </Routes>
-      </div>
     </Router>
     );
 }
