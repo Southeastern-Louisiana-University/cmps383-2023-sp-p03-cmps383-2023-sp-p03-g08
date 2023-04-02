@@ -4,9 +4,18 @@ import AuthService from "../services/AuthService";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Placeholder from "../components/Placeholder";
 function Profile() {
     const currentUser = AuthService.getCurrentUser();
     const navigate = useNavigate();
+    if (currentUser == null) {
+        return (
+            <Container className="text-center">
+                <h2>You aren't logged in right now.</h2>
+                <Placeholder />
+            </Container>
+        );
+    }
     async function logOut() {
         await axios.post("/api/authentication/logout")
         .then(function(response) {

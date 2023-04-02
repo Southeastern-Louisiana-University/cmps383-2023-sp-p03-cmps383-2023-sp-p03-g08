@@ -27,8 +27,7 @@ function NavBar() {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true); 
-    let userComponent; //test code, actually want to render based on backend authentication eventually
-    //let isLoggedIn = false;
+    let userComponent;
     if (currentUser != null) {
       userComponent = <SignedIn />
     }
