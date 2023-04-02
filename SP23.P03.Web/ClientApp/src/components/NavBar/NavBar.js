@@ -20,15 +20,16 @@ import SignedIn from '../User/SignedIn';
 import NotSignedIn from '../User/NotSignedIn';
 import NotFound from '../../pages/NotFound';
 import Trains from '../../pages/Trains';
+import AuthService from '../../services/AuthService';
 
 function NavBar() {
+    const currentUser = AuthService.getCurrentUser();
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-
+    const handleShow = () => setShow(true); 
     let userComponent; //test code, actually want to render based on backend authentication eventually
-    let isLoggedIn = false;
-    if (isLoggedIn) {
+    //let isLoggedIn = false;
+    if (currentUser != null) {
       userComponent = <SignedIn />
     }
     else {
