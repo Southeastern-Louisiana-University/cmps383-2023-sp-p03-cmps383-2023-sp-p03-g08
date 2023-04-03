@@ -104,9 +104,9 @@ public class RoutesController : ControllerBase
     }
     [HttpPut("{routeid}/addstations/{stationid}")]
     [Authorize(Roles = RoleNames.Admin)]
-    public ActionResult AddStationsToRoute(int routeid, int stationid) //doesn't work
+    public ActionResult AddStationsToRoute(int routeid, int stationid) 
     {
-        var routetoedit = routes.FirstOrDefault(x => x.Id == routeid);
+        var routetoedit = routes.Include(r => r.TrainStations).FirstOrDefault(x => x.Id == routeid);
         if (routetoedit == null)
         {
             return NotFound("Route doesn't exist.");
@@ -117,15 +117,17 @@ public class RoutesController : ControllerBase
             return NotFound("Station doesn't exist");
         }
         //make sure station isn't already in route (RouteTrainStation composite key would reject as well, but catch the error)
-        var stationinroute = routetoedit.TrainStations.FirstOrDefault(x => x.Id == stationtoadd.Id); 
-        if (!stationinroute.Equals(null)) //if it has been found
+        var stationinroute = routetoedit.TrainStations.FirstOrDefault(x => x.Id == stationtoadd.Id);
+        if ((stationinroute != default) || (stationinroute != null)) //if it has been found
         {
             return BadRequest("Station already in the route.");
         }
+
         routetoedit.TrainStations.Add(stationtoadd);
         dataContext.SaveChanges();
-        var resultofadd = GetRouteAndStationsDtos(routes.Where(x => x.Id == routetoedit.Id)).FirstOrDefault();
-        return Ok(resultofadd);
+        //var resultofadd = GetRouteAndStationsDtos(routes.Where(x => x.Id == routetoedit.Id)).FirstOrDefault();
+        //return Ok(resultofadd);
+        return Ok();
     }
 
     [HttpDelete("{id}")]
@@ -143,15 +145,15 @@ public class RoutesController : ControllerBase
     }
     [HttpDelete("{routeid}/deletestations/{stationid}")]
     [Authorize(Roles = RoleNames.Admin)]
-    public ActionResult DeleteStationFromRoute(int routeid, int stationid) //doesn't work, can't delete individual station
+    public ActionResult DeleteStationFromRoute(int routeid, int stationid)
     {
-        var routetoedit = routes.FirstOrDefault(x => x.Id == routeid);
+        var routetoedit = routes.Include(r => r.TrainStations).FirstOrDefault(x => x.Id == routeid);
         if (routetoedit == null)
         {
             return NotFound("Route doesn't exist.");
         }
         var stationtoremove = routetoedit.TrainStations.FirstOrDefault(x => x.Id == stationid);
-        if (stationtoremove == null) //doesn't work, is always null
+        if (stationtoremove == null)
         {
             return NotFound("Train station specified is not in the route.");
         }
