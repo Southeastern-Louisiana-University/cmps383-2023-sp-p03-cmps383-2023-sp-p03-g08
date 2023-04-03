@@ -161,7 +161,7 @@ public static class SeedHelper
         var ts2 = trainStations.First(x => x.Name == "Test 2");
         var ts3 = trainStations.First(x => x.Name == "Test 3");
 
-        testroute.TrainStations.AddRange(new[] { ts1, ts2, ts3 }); 
+        testroute.TrainStations.AddRange(new[] { ts1, ts2 }); 
         dataContext.SaveChanges();
     }
 

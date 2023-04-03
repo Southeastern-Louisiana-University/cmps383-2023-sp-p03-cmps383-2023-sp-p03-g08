@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
@@ -103,7 +104,7 @@ public class RoutesController : ControllerBase
     }
     [HttpPut("{routeid}/addstations/{stationid}")]
     [Authorize(Roles = RoleNames.Admin)]
-    public ActionResult AddStationsToRoute(int routeid, int stationid) 
+    public ActionResult AddStationsToRoute(int routeid, int stationid) //doesn't work
     {
         var routetoedit = routes.FirstOrDefault(x => x.Id == routeid);
         if (routetoedit == null)
@@ -117,7 +118,7 @@ public class RoutesController : ControllerBase
         }
         //make sure station isn't already in route (RouteTrainStation composite key would reject as well, but catch the error)
         var stationinroute = routetoedit.TrainStations.FirstOrDefault(x => x.Id == stationtoadd.Id); 
-        if (stationinroute == default) 
+        if (!stationinroute.Equals(null)) //if it has been found
         {
             return BadRequest("Station already in the route.");
         }
@@ -125,6 +126,38 @@ public class RoutesController : ControllerBase
         dataContext.SaveChanges();
         var resultofadd = GetRouteAndStationsDtos(routes.Where(x => x.Id == routetoedit.Id)).FirstOrDefault();
         return Ok(resultofadd);
+    }
+
+    [HttpDelete("{id}")]
+    [Authorize(Roles = RoleNames.Admin)]
+    public ActionResult DeleteRoute(int id) //works
+    {
+        var routetodelete = routes.FirstOrDefault(x => x.Id == id);
+        if (routetodelete == null)
+        {
+            return NotFound("Route doesn't exist.");
+        }
+        routes.Remove(routetodelete);
+        dataContext.SaveChanges();
+        return Ok();
+    }
+    [HttpDelete("{routeid}/deletestations/{stationid}")]
+    [Authorize(Roles = RoleNames.Admin)]
+    public ActionResult DeleteStationFromRoute(int routeid, int stationid) //doesn't work, can't delete individual station
+    {
+        var routetoedit = routes.FirstOrDefault(x => x.Id == routeid);
+        if (routetoedit == null)
+        {
+            return NotFound("Route doesn't exist.");
+        }
+        var stationtoremove = routetoedit.TrainStations.FirstOrDefault(x => x.Id == stationid);
+        if (stationtoremove == null) //doesn't work, is always null
+        {
+            return NotFound("Train station specified is not in the route.");
+        }
+        routetoedit.TrainStations.Remove(stationtoremove);
+        dataContext.SaveChanges();
+        return Ok();
     }
 
     private bool IsInvalid(RouteDto dto)
