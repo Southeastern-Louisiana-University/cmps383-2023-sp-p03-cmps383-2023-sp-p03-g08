@@ -15,7 +15,7 @@ import TrainRoutes from '../../pages/TrainRoutes';
 import Trips from '../../pages/Trips';
 import TripBooking from '../../pages/TripBooking';
 import Home from '../../pages/Home';
-import Profile from '../../pages/Profile';
+import Profile from '../../pages/Profile/Profile';
 import SignedIn from '../User/SignedIn';
 import NotSignedIn from '../User/NotSignedIn';
 import NotFound from '../../pages/NotFound';
@@ -69,9 +69,9 @@ function NavBar() {
             </Col>
             <Col className="d-flex justify-content-center">
               <Nav.Link as={Link} to={"/tripbooking"}>
-              <Button variant="warning" size="lg" style={{color: 'white'}}>
+              <Button variant="light" size="lg" style={{color: '#d8b4fe'}}>
               <img src={ticket} alt="a ticket" style={{marginRight: '10px'}}/>
-              Book a Trip
+                Book a Trip
               </Button>
               </Nav.Link>
             </Col>
