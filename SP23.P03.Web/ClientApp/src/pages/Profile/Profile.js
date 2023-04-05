@@ -21,7 +21,7 @@ function Profile() {
         );
     }
     async function logOut() {
-        localStorage.removeItem("user");
+        sessionStorage.removeItem("user");
         navigate("/");
         window.location.reload()
         await axios.post("/api/authentication/logout")
