@@ -1,7 +1,7 @@
 
 const getCurrentUser = () => {
     // @ts-ignore
-    return JSON.parse(sessionStorage.getItem("user"));
+    return JSON.parse(localStorage.getItem("user"));
 };
 
 const AuthService = {

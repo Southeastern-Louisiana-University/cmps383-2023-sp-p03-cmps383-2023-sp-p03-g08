@@ -33,7 +33,7 @@ function NotSignedIn() {
           if (response.status === 200) {
             console.log("It's 200");
             //setUser(response.data);
-            sessionStorage.setItem("user", JSON.stringify(response.data));
+            localStorage.setItem("user", JSON.stringify(response.data));
             console.log(response.data);
             navigate("/profile");
             window.location.reload();

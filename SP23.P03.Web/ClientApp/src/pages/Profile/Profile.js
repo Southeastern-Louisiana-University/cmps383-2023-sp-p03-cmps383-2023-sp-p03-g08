@@ -21,15 +21,15 @@ function Profile() {
         );
     }
     async function logOut() {
-        sessionStorage.removeItem("user");
-        navigate("/");
-        window.location.reload()
         await axios.post("/api/authentication/logout")
         .then(function(response) {
-        //    if (response.status === 200) {
-          //      console.log("It's 200");
+          if (response.status === 200) {
+                console.log("It's 200");
+                localStorage.removeItem("user");
+                navigate("/");
+                window.location.reload()
                 console.log(response.data);
-         //   }
+            }
         })
         .catch((err) => {console.log(err)});
     }
