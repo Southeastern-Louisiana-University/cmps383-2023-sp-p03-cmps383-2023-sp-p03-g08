@@ -13,7 +13,7 @@ import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
 import TrainStations from '../../pages/Stations/TrainStations';
 import TrainRoutes from '../../pages/TrainRoutes';
 import Trips from '../../pages/Trips';
-import TripBooking from '../../pages/TripBooking';
+import TripBooking from '../../pages/TripBooking/TripBooking';
 import Home from '../../pages/Home';
 import Profile from '../../pages/Profile/Profile';
 import SignedIn from '../User/SignedIn';
