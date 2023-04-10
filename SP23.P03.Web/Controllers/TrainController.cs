@@ -49,7 +49,11 @@ public class TrainController : ControllerBase
         var train = new Train
         {
             Name = dto.Name,
-            Capacity = dto.Capacity
+            CoachCapacity = dto.CoachCapacity,
+            FirstClassCapacity = dto.FirstClassCapacity,
+            SleeperCapacity = dto.SleeperCapacity,
+            RoomletCapacity = dto.RoomletCapacity,
+            Dining = dto.Dining
         };
         trains.Add(train);
         dataContext.SaveChanges();
@@ -57,7 +61,11 @@ public class TrainController : ControllerBase
         {
             Id = train.Id,
             Name = train.Name,
-            Capacity = train.Capacity
+            CoachCapacity = train.CoachCapacity,
+            FirstClassCapacity = train.FirstClassCapacity,
+            SleeperCapacity = train.SleeperCapacity,
+            RoomletCapacity = train.RoomletCapacity,
+            Dining = train.Dining
         };
 
         return Ok(returnTrain);
@@ -77,14 +85,23 @@ public class TrainController : ControllerBase
             return NotFound();
         }
         train.Name = dto.Name;
-        train.Capacity = dto.Capacity;
+        train.CoachCapacity = dto.CoachCapacity;
+        train.FirstClassCapacity = dto.FirstClassCapacity;
+        train.SleeperCapacity = dto.SleeperCapacity;
+        train.RoomletCapacity = dto.RoomletCapacity;
+        train.Dining = dto.Dining;
+
 
         dataContext.SaveChanges();
         var returnTrain = new TrainDto
         {
             Id = train.Id,
             Name = train.Name,
-            Capacity = train.Capacity
+            CoachCapacity = train.CoachCapacity,
+            FirstClassCapacity = train.FirstClassCapacity,
+            SleeperCapacity = train.SleeperCapacity,
+            RoomletCapacity = train.RoomletCapacity,
+            Dining = train.Dining
         };
 
         return Ok(returnTrain);
@@ -107,7 +124,8 @@ public class TrainController : ControllerBase
     private bool IsInvalid(TrainDto dto)
     {
         return string.IsNullOrWhiteSpace(dto.Name) ||
-               dto.Name.Length > 75 || dto.Capacity < 0;
+               dto.Name.Length > 75 || dto.CoachCapacity < 0 || dto.FirstClassCapacity < 0 || dto.SleeperCapacity < 0
+               || dto.RoomletCapacity < 0; //something for Dining
     }
 
     private static IQueryable<TrainDto> GetTrainDtos(IQueryable<Train> trains)
@@ -117,7 +135,11 @@ public class TrainController : ControllerBase
             {
                 Id = x.Id,
                 Name = x.Name,
-                Capacity = x.Capacity
+                CoachCapacity = x.CoachCapacity,
+                FirstClassCapacity = x.FirstClassCapacity,
+                SleeperCapacity= x.SleeperCapacity,
+                RoomletCapacity= x.RoomletCapacity,
+                Dining = x.Dining
             });
     }
 
