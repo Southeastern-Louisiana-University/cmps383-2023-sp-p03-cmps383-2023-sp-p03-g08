@@ -405,13 +405,21 @@ public static class SeedHelper
 
         trains.Add(new Train
         {
-            Name = "EnTrack 1",
-            Capacity = 100
+            Name = "Siemens Charger #1",
+            CoachCapacity = 558,
+            FirstClassCapacity = 42,
+            SleeperCapacity = 0,
+            RoomletCapacity = 0,
+            Dining = false
         });
         trains.Add(new Train
         {
-            Name = "EnTrack 2",
-            Capacity = 50
+            Name = "Siemens Charger #2",
+            CoachCapacity = 336,
+            FirstClassCapacity = 84,
+            SleeperCapacity = 10,
+            RoomletCapacity = 4,
+            Dining = true
         });
         await dataContext.SaveChangesAsync();
     }
