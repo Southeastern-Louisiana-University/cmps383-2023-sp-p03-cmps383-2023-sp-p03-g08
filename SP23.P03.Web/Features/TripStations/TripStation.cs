@@ -14,5 +14,7 @@ public class TripStation
     public string Address { get; set; } = string.Empty;
     public string City { get; set; } = string.Empty;
     public string State { get; set; } = string.Empty;
-    public DateTime? ArrivalTime { get; set; }
+    //    public DateTime? ArrivalTime { get; set; }
+    public string? ArrivalDate { get; set; } = string.Empty;
+    public string? ArrivalTime { get; set; } = string.Empty;
 }

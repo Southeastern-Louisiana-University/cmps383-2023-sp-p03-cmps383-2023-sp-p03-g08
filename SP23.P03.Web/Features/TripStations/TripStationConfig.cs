@@ -12,6 +12,5 @@ public class TripStationConfig : IEntityTypeConfiguration<TripStation>
         builder.Property(x => x.Address).IsRequired();
         builder.Property(x => x.City).IsRequired();
         builder.Property(x => x.State).IsRequired();
-    //    builder.Property(x => x.ArrivalTime).IsRequired(); null to set later?
     }
 }
