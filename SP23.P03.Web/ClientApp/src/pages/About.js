@@ -1,13 +1,14 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 import Placeholder from "../components/Placeholder";
-function Trains() {
+function About() {
     return (
         <Container className="text-center">
-            <h1>Trains</h1>
+            <h1>About Us</h1>
             <Placeholder />
         </Container>
     );
 }
 
-export default Trains;
+export default About;
+    
