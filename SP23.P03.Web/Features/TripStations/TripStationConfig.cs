@@ -6,6 +6,12 @@ public class TripStationConfig : IEntityTypeConfiguration<TripStation>
 {
     public void Configure(EntityTypeBuilder<TripStation> builder)
     {
-
+        builder.Property(x => x.TripId).IsRequired();
+        builder.Property(x => x.TrainStationId).IsRequired();
+        builder.Property(x => x.Name).IsRequired();
+        builder.Property(x => x.Address).IsRequired();
+        builder.Property(x => x.City).IsRequired();
+        builder.Property(x => x.State).IsRequired();
+    //    builder.Property(x => x.ArrivalTime).IsRequired(); null to set later?
     }
 }
