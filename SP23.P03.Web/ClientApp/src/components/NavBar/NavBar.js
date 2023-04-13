@@ -13,13 +13,15 @@ import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
 import TrainStations from '../../pages/Stations/TrainStations';
 import TrainRoutes from '../../pages/TrainRoutes';
 import Trips from '../../pages/Trips';
-import TripBooking from '../../pages/TripBooking';
+import TripBooking from '../../pages/TripBooking/TripBooking';
 import Home from '../../pages/Home';
 import Profile from '../../pages/Profile/Profile';
 import SignedIn from '../User/SignedIn';
 import NotSignedIn from '../User/NotSignedIn';
 import NotFound from '../../pages/NotFound';
-import Trains from '../../pages/Trains';
+import Trains from '../../pages/Trains/Trains';
+import About from '../../pages/About';
+import Prices from '../../pages/PricesAndSeating/Prices';
 import AuthService from '../../services/AuthService';
 import Col from "react-bootstrap/Col";
 
@@ -63,6 +65,8 @@ function NavBar() {
                 <Nav.Link as={Link} to={"/routes"}>Routes</Nav.Link>
                 <Nav.Link as={Link} to={"/trips"}>Trips</Nav.Link>
                 <Nav.Link as={Link} to={"/trains"}>Trains</Nav.Link>
+                <Nav.Link as={Link} to={"/prices"}>Seating/Prices</Nav.Link>
+                <Nav.Link as={Link} to={"/about"}>About Us</Nav.Link>
                 </Nav>
               </Offcanvas.Body>
             </Offcanvas>
@@ -90,6 +94,8 @@ function NavBar() {
         <Route path="/tripbooking" element={<TripBooking />}/>
         <Route path="/profile" element={<Profile />}/>
         <Route path="/trains" element={<Trains />}/>
+        <Route path="/prices" element={<Prices />}/>
+        <Route path="/about" element={<About />}/>
         <Route path="/" element={<Home />}/>
         <Route path="*" element={<NotFound />} /*this route must be last*//>
        </Routes>
