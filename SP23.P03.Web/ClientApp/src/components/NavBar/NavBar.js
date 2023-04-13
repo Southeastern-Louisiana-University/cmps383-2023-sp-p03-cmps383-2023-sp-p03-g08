@@ -21,7 +21,7 @@ import NotSignedIn from '../User/NotSignedIn';
 import NotFound from '../../pages/NotFound';
 import Trains from '../../pages/Trains/Trains';
 import About from '../../pages/About';
-import Prices from '../../pages/Prices';
+import Prices from '../../pages/PricesAndSeating/Prices';
 import AuthService from '../../services/AuthService';
 import Col from "react-bootstrap/Col";
 
@@ -65,6 +65,8 @@ function NavBar() {
                 <Nav.Link as={Link} to={"/routes"}>Routes</Nav.Link>
                 <Nav.Link as={Link} to={"/trips"}>Trips</Nav.Link>
                 <Nav.Link as={Link} to={"/trains"}>Trains</Nav.Link>
+                <Nav.Link as={Link} to={"/prices"}>Seating/Prices</Nav.Link>
+                <Nav.Link as={Link} to={"/about"}>About Us</Nav.Link>
                 </Nav>
               </Offcanvas.Body>
             </Offcanvas>
