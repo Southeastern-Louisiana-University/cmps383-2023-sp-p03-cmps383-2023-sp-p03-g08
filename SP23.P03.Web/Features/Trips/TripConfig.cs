@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿/*using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace SP23.P03.Web.Features.Trips;
@@ -20,4 +20,4 @@ public class TripConfig : IEntityTypeConfiguration<Trip>
         builder.Property(x => x.Dining).IsRequired();
         builder.Property(x => x.BasePrice).IsRequired();
     }
-}
+}*/
