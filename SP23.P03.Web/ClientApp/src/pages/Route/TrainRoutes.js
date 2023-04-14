@@ -5,7 +5,7 @@ import GetRoutes from "./GetRoutes";
 function TrainRoutes() {
     return (
       <Container className="text-center">
-        <h1>Routes</h1>
+        <h1>Our Routes</h1>
         <GetRoutes/>
       </Container>
     );

@@ -3,11 +3,12 @@ import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 import Loading from "../../components/Loading";
+import ListGroup from 'react-bootstrap/ListGroup';
 
 function routeStations(obj) {
     var rs = [];
     for(let i = 0; i < obj.length; i++) {
-        rs.push(<div>{obj[i].city}</div>);
+        rs.push(<ListGroup.Item>{obj[i].name + " - " + obj[i].address + " - " + obj[i].city + ", " + obj[i].state}</ListGroup.Item>);
     }
     return rs;
 }
@@ -31,10 +32,13 @@ function GetRoutes() {
                                     <i>{route.order}</i><br/>
                                 </Card.Text>
                                 <Card.Text>
-                                {route.description}
+                               <h5>{route.description}</h5>
                                 </Card.Text>
-                                <Card.Text>
-                                    {routeStations(route.trainStations)}
+                                <Card.Text className="text-start">
+                                    <b>Serving Train Stations:</b>
+                                    <ListGroup>
+                                        {routeStations(route.trainStations)}
+                                    </ListGroup>
                                 </Card.Text>
                             </Card.Body>
                         </Card>

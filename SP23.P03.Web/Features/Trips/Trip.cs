@@ -1,5 +1,6 @@
-﻿/*using Route = SP23.P03.Web.Features.Routes.Route;
+﻿using Route = SP23.P03.Web.Features.Routes.Route;
 using SP23.P03.Web.Features.Trains;
+using SP23.P03.Web.Features.TripStations;
 
 namespace SP23.P03.Web.Features.Trips;
 
@@ -20,4 +21,5 @@ public class Trip
     public decimal RoomletsPrice { get;set; }
     public Boolean Dining { get; set; }
     public decimal BasePrice { get; set; }
-}*/
+    public List<TripStation> TripStations { get; set; } = new List<TripStation>();
+}

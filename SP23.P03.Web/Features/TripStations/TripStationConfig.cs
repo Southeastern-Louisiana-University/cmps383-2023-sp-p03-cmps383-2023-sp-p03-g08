@@ -1,4 +1,4 @@
-﻿/*using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 namespace SP23.P03.Web.Features.TripStations;
 
@@ -13,4 +13,4 @@ public class TripStationConfig : IEntityTypeConfiguration<TripStation>
         builder.Property(x => x.City).IsRequired();
         builder.Property(x => x.State).IsRequired();
     }
-}*/
+}
