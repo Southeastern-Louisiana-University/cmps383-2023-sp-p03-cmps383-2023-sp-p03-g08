@@ -433,9 +433,9 @@ public static class SeedHelper
 
         routes.Add(new Route
         {
-            Name = "Test Route",
-            Description = "The test route",
-            Order = "Order"
+            Name = "SANO",
+            Description = "Travel from Texas to Louisiana and see great historical landmarks such as The Alamo and the National WWII Museum.",
+            Order = "San Antonio - Houston - Beaumont - Lake Charles - Lafayette - New Iberia - Schriever - New Orleans"
         });
         await dataContext.SaveChangesAsync();
     }
@@ -447,15 +447,20 @@ public static class SeedHelper
         {
             return;
         }
-/*
-        var routes = dataContext.Set<Route>();
-        var testroute = routes.First(x => x.Name == "Test Route");
-        
-        var ts1 = trainStations.First(x => x.Name == "Test 1");
-        var ts2 = trainStations.First(x => x.Name == "Test 2");
-        var ts3 = trainStations.First(x => x.Name == "Test 3");
 
-        testroute.TrainStations.AddRange(new[] { ts1, ts2 }); */
+        var routes = dataContext.Set<Route>();
+        var SANO = routes.First(x => x.Name == "SANO");
+        
+        var ts1 = trainStations.First(x => x.Name == "San Antonio Station");
+        var ts2 = trainStations.First(x => x.Name == "Houston Station");
+        var ts3 = trainStations.First(x => x.Name == "Beaumont Station");
+        var ts4 = trainStations.First(x => x.Name == "Lake Charles Station");
+        var ts5 = trainStations.First(x => x.Name == "Lafayette Station");
+        var ts6 = trainStations.First(x => x.Name == "New Iberia Station");
+        var ts7 = trainStations.First(x => x.Name == "Schriever Station");
+        var ts8 = trainStations.First(x => x.Name == "New Orleans Station");
+
+        SANO.TrainStations.AddRange(new[] { ts1, ts2, ts3, ts4, ts5, ts6, ts7, ts8 }); 
         await dataContext.SaveChangesAsync();
     }
 

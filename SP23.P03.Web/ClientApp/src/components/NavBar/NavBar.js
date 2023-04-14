@@ -11,7 +11,7 @@ import ticket from './ticket.svg';
 import {useState} from 'react';
 import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
 import TrainStations from '../../pages/Stations/TrainStations';
-import TrainRoutes from '../../pages/TrainRoutes';
+import TrainRoutes from '../../pages/Route/TrainRoutes';
 import Trips from '../../pages/Trips';
 import TripBooking from '../../pages/TripBooking/TripBooking';
 import Home from '../../pages/Home';

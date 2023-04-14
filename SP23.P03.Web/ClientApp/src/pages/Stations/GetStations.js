@@ -12,6 +12,7 @@ function GetStations() {
     useEffect(() => {
         axios.get("api/stations").then((response) => {
             setStation(response.data)
+            console.log(response.data);
         }).catch((err) => {console.log(err)})
     }, [])
     return (

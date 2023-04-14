@@ -28,9 +28,10 @@ public class RoutesController : ControllerBase
     }
 
     [HttpGet]
-    public IQueryable<RouteDto> GetRoutes()
+    public IQueryable<RouteAndStationsDto> GetRoutes()
     {
-        return GetRouteDtos(routes);
+        // return GetRouteDtos(routes);
+        return GetRouteAndStationsDtos(routes);
     }
 
     [HttpGet("{id}")]
