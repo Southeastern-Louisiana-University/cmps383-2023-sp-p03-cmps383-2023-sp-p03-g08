@@ -4,6 +4,13 @@ import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 import Loading from "../../components/Loading";
 
+function routeStations(obj) {
+    var rs = [];
+    for(let i = 0; i < obj.length; i++) {
+        rs.push(<div>{obj[i].city}</div>);
+    }
+    return rs;
+}
 function GetRoutes() {
     const [routes, setRoute] = useState();
     useEffect(() => {
@@ -27,7 +34,7 @@ function GetRoutes() {
                                 {route.description}
                                 </Card.Text>
                                 <Card.Text>
-                                    {route.trainStations[1].city}
+                                    {routeStations(route.trainStations)}
                                 </Card.Text>
                             </Card.Body>
                         </Card>
