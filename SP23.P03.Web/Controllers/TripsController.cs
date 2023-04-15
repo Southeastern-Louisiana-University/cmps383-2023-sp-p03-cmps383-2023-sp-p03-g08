@@ -115,8 +115,9 @@ public class TripsController : ControllerBase
             RoomletsPrice = triptoadd.RoomletsPrice,
             Dining = triptoadd.Dining,
             BasePrice = triptoadd.BasePrice,
-            TripStations = triptoadd.TripStations
+        //    TripStations = triptoadd.TripStations
         };
+
         return Ok(triptoreturn);
         
     }
