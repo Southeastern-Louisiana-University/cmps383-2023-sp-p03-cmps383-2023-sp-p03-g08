@@ -56,7 +56,7 @@ public class TripsController : ControllerBase
         var coachprice = 105;
         var firstclassprice = 270;
         var sleeperprice = 370;
-        var roomletprice = 400;
+        var roomletprice = 400; //look into
 
         var train = trains.Where(x => x.Id == dto.TrainId).FirstOrDefault();
         if (train == null)
@@ -80,7 +80,7 @@ public class TripsController : ControllerBase
             SleepersLeft = train.SleeperCapacity,
             SleeperPrice = sleeperprice,
             RoomletsLeft = train.RoomletCapacity,
-            RoomletsPrice = roomletprice,
+            RoomletsPrice = roomletprice, //somehow being returned as 0 in swagger? But correct in the DB?
             Dining = train.Dining,
             BasePrice = dto.BasePrice
         };
@@ -101,7 +101,7 @@ public class TripsController : ControllerBase
             });
         }
         dataContext.SaveChanges();
-        var triptoreturn = new TripDto
+       /* var triptoreturn = new TripDto
         {
             TrainId = triptoadd.Id,
             RouteId = triptoadd.RouteId,
@@ -115,10 +115,10 @@ public class TripsController : ControllerBase
             RoomletsPrice = triptoadd.RoomletsPrice,
             Dining = triptoadd.Dining,
             BasePrice = triptoadd.BasePrice,
-        //    TripStations = triptoadd.TripStations
-        };
+            TripStations = triptoadd.TripStations.Select
+        };*/
 
-        return Ok(triptoreturn);
+        return Ok(GetTripAndStationsDtos(trips.Where(x => x.Id == triptoadd.Id)));
         
     }
 
@@ -138,7 +138,18 @@ public class TripsController : ControllerBase
             RoomletsLeft = x.RoomletsLeft,
             Dining = x.Dining,
             BasePrice = x.BasePrice,
-            TripStations = x.TripStations
+            TripStations = x.TripStations.Select(x => new TripStationDto
+            {
+                Id = x.Id,
+                TripId = x.TripId,
+                TrainStationId = x.TrainStationId,
+                Name = x.Name,
+                Address = x.Address,
+                City = x.City,
+                State = x.State,
+                ArrivalDate = x.ArrivalDate,
+                ArrivalTime = x.ArrivalTime
+            }).ToList(),
         });
     }
 }

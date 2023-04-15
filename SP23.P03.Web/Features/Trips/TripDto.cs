@@ -18,8 +18,8 @@ public class TripDto
     public decimal RoomletsPrice { get; set; }
     public Boolean Dining { get; set; }
     public decimal BasePrice { get; set; }
-    public List<TripStation> TripStations { get; set; }
-}
+    public List<TripStationDto> TripStations { get; set; } = new List<TripStationDto>();
+} 
 
 public class PostTripDto
 {
