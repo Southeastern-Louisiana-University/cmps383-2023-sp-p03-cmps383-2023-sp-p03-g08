@@ -35,13 +35,13 @@ public class TripsController : ControllerBase
     [HttpGet]
     public IQueryable<TripDto> GetTrips()
     {
-        return GetTripAndStationsDtos(trips);
+        return GetTripAndStationsDtos(trips, routes);
     }
 
     [HttpGet("{id}")]
     public ActionResult GetTripById(int id)
     {
-        var result = GetTripAndStationsDtos(trips.Where(x => x.Id == id));
+        var result = GetTripAndStationsDtos(trips.Where(x => x.Id == id), routes);
         if (result == null)
         {
             return NotFound();
@@ -118,7 +118,7 @@ public class TripsController : ControllerBase
             TripStations = triptoadd.TripStations.Select
         };*/
 
-        return Ok(GetTripAndStationsDtos(trips.Where(x => x.Id == triptoadd.Id)));
+        return Ok(GetTripAndStationsDtos(trips.Where(x => x.Id == triptoadd.Id), routes));
         
     }
 
@@ -141,16 +141,17 @@ public class TripsController : ControllerBase
         tripstationtoedit.ArrivalDate = dto.ArrivalDate;
         tripstationtoedit.ArrivalTime = dto.ArrivalTime;
         dataContext.SaveChanges();
-        return Ok(GetTripAndStationsDtos(trips.Where(x => x.Id == triptoedit.Id)));
+        return Ok(GetTripAndStationsDtos(trips.Where(x => x.Id == triptoedit.Id), routes));
     }
 
-    private static IQueryable<TripDto> GetTripAndStationsDtos(IQueryable<Trip> trips)
+    private static IQueryable<TripDto> GetTripAndStationsDtos(IQueryable<Trip> trips, IQueryable<Route> routes)
     {
         return trips.Select(x => new TripDto
         {
             Id = x.Id,
             TrainId = x.TrainId,
             RouteId = x.RouteId,
+            RouteName = routes.Where(r => r.Id == x.RouteId).First().Name,
             CoachSeatsLeft = x.CoachSeatsLeft,
             CoachPrice = x.CoachPrice,
             FirstClassSeatsLeft = x.FirstClassSeatsLeft,

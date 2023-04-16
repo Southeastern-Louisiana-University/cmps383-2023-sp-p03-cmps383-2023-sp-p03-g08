@@ -7,6 +7,8 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+import Accordion from 'react-bootstrap/Accordion';
+import Badge from 'react-bootstrap/Badge';
 
 function tripStations(obj) {
     var ts = [];
@@ -30,9 +32,9 @@ function GetTrips() {
                     return (
                         <Card key={trip.id}>
                             <Card.Body>
-                                <Card.Title>Following Route {trip.routeId}</Card.Title>
+                                <Card.Title>Travelling the {trip.routeName} Route </Card.Title>
                                 <Card.Text className="text-start">
-                                    <h4>Amenities/Seating Available:</h4>
+                                    <h4><i>Amenities/Seating Available:</i></h4>
                                     <Row>
                                         <Col>{trip.coachSeatsLeft > 0 && 
                                               <div><h5>Coach</h5>
@@ -52,11 +54,22 @@ function GetTrips() {
                                                 </div>}</Col>
                                         <Col>{trip.dining === 'true' && 
                                                 <div><h5>Dining</h5></div>}</Col>
-                                    </Row><br/>
-                                    <h4>Estimated Arrival Times: </h4>
-                                    <ListGroup>
-                                        {tripStations(trip.tripStations)}
-                                    </ListGroup>
+                                        <Col>
+                                            <h4>Starting At</h4>
+                                            <h2><Badge pill bg="info">${trip.coachPrice + trip.basePrice}</Badge></h2>
+                                        </Col>
+                                    </Row>
+                                    <br/>
+                                    <Accordion>
+                                        <Accordion.Item eventKey="0">
+                                            <Accordion.Header><h4>View Estimated Arrival Times</h4></Accordion.Header>
+                                            <Accordion.Body>
+                                            <ListGroup>
+                                                {tripStations(trip.tripStations)}
+                                            </ListGroup>
+                                            </Accordion.Body>
+                                        </Accordion.Item>
+                                    </Accordion>
                                 </Card.Text>
                             </Card.Body>
                         </Card>

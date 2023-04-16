@@ -8,6 +8,7 @@ public class TripDto
     public int Id { get; set; }
     public int TrainId { get; set; }
     public int RouteId { get; set; }
+    public string RouteName { get; set; } = string.Empty; //new
     public int CoachSeatsLeft { get; set; }
     public decimal CoachPrice { get; set; }
     public int FirstClassSeatsLeft { get; set; }
