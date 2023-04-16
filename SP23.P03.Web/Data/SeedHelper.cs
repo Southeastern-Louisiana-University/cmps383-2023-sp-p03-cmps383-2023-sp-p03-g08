@@ -4,6 +4,8 @@ using SP23.P03.Web.Features.Authorization;
 using SP23.P03.Web.Features.TrainStations;
 using SP23.P03.Web.Features.Trains;
 using Route = SP23.P03.Web.Features.Routes.Route;
+using SP23.P03.Web.Features.Trips;
+using SP23.P03.Web.Features.TripStations;
 
 namespace SP23.P03.Web.Data;
 
@@ -22,6 +24,7 @@ public static class SeedHelper
         await AddTrains(dataContext);
         await AddRoutes(dataContext);
         await AddRouteTrainStations(dataContext);
+        await AddTrips(dataContext);
 
     }
 
@@ -461,6 +464,152 @@ public static class SeedHelper
         var ts8 = trainStations.First(x => x.Name == "New Orleans Station");
 
         SANO.TrainStations.AddRange(new[] { ts1, ts2, ts3, ts4, ts5, ts6, ts7, ts8 }); 
+        await dataContext.SaveChangesAsync();
+    }
+
+    private static async Task AddTrips(DataContext dataContext)
+    {
+        var trips = dataContext.Set<Trip>();
+        if (await trips.AnyAsync())
+        {
+            return;
+        }
+
+        var tripstations = dataContext.Set<TripStation>();
+        if (await tripstations.AnyAsync())
+        {
+            return;
+        }
+        var routes = dataContext.Set<Route>();
+        var SANO = routes.First(x => x.Name == "SANO");
+
+        var trains = dataContext.Set<Train>();
+        var siemenscharger1 = trains.First(x => x.Name == "Siemens Charger #1");
+
+        var seedtrip = new Trip
+        {
+            TrainId = siemenscharger1.Id,
+            RouteId = SANO.Id,
+            CoachSeatsLeft = siemenscharger1.CoachCapacity,
+            CoachPrice = 105,
+            FirstClassSeatsLeft = siemenscharger1.FirstClassCapacity,
+            FirstClassPrice = 270,
+            SleepersLeft = siemenscharger1.SleeperCapacity,
+            SleeperPrice = 370,
+            RoomletsLeft = siemenscharger1.RoomletCapacity,
+            RoomletsPrice = 400,
+            Dining = siemenscharger1.Dining,
+            BasePrice = 50
+        };
+        trips.Add(seedtrip);
+        await dataContext.SaveChangesAsync();
+
+        var trainStations = dataContext.Set<TrainStation>();
+        var ts1 = trainStations.First(x => x.Name == "San Antonio Station");
+        var ts2 = trainStations.First(x => x.Name == "Houston Station");
+        var ts3 = trainStations.First(x => x.Name == "Beaumont Station");
+        var ts4 = trainStations.First(x => x.Name == "Lake Charles Station");
+        var ts5 = trainStations.First(x => x.Name == "Lafayette Station");
+        var ts6 = trainStations.First(x => x.Name == "New Iberia Station");
+        var ts7 = trainStations.First(x => x.Name == "Schriever Station");
+        var ts8 = trainStations.First(x => x.Name == "New Orleans Station");
+
+        seedtrip.TripStations.Add(new TripStation
+        {
+            TripId = seedtrip.Id,
+            TrainStationId = ts1.Id,
+            Name = ts1.Name,
+            Address = ts1.Address,
+            City = ts1.City,
+            State = ts1.State,
+            ArrivalDate = "2023-05-20",
+            ArrivalTime = "12:00"
+        });
+
+        seedtrip.TripStations.Add(new TripStation
+        {
+            TripId = seedtrip.Id,
+            TrainStationId = ts2.Id,
+            Name = ts2.Name,
+            Address = ts2.Address,
+            City = ts2.City,
+            State = ts2.State,
+            ArrivalDate = "2023-05-20",
+            ArrivalTime = "16:00"
+        });
+
+        seedtrip.TripStations.Add(new TripStation
+        {
+            TripId = seedtrip.Id,
+            TrainStationId = ts3.Id,
+            Name = ts3.Name,
+            Address = ts3.Address,
+            City = ts3.City,
+            State = ts3.State,
+            ArrivalDate = "2023-05-20",
+            ArrivalTime = "18:00"
+        });
+
+        seedtrip.TripStations.Add(new TripStation
+        {
+            TripId = seedtrip.Id,
+            TrainStationId = ts4.Id,
+            Name = ts4.Name,
+            Address = ts4.Address,
+            City = ts4.City,
+            State = ts4.State,
+            ArrivalDate = "2023-05-20",
+            ArrivalTime = "19:00"
+        });
+
+        seedtrip.TripStations.Add(new TripStation
+        {
+            TripId = seedtrip.Id,
+            TrainStationId = ts5.Id,
+            Name = ts5.Name,
+            Address = ts5.Address,
+            City = ts5.City,
+            State = ts5.State,
+            ArrivalDate = "2023-05-20",
+            ArrivalTime = "21:00"
+        });
+
+        seedtrip.TripStations.Add(new TripStation
+        {
+            TripId = seedtrip.Id,
+            TrainStationId = ts6.Id,
+            Name = ts6.Name,
+            Address = ts6.Address,
+            City = ts6.City,
+            State = ts6.State,
+            ArrivalDate = "2023-05-20",
+            ArrivalTime = "22:00"
+        });
+
+        seedtrip.TripStations.Add(new TripStation
+        {
+            TripId = seedtrip.Id,
+            TrainStationId = ts7.Id,
+            Name = ts7.Name,
+            Address = ts7.Address,
+            City = ts7.City,
+            State = ts7.State,
+            ArrivalDate = "2023-05-20",
+            ArrivalTime = "23:00"
+        });
+
+        seedtrip.TripStations.Add(new TripStation
+        {
+            TripId = seedtrip.Id,
+            TrainStationId = ts8.Id,
+            Name = ts8.Name,
+            Address = ts8.Address,
+            City = ts8.City,
+            State = ts8.State,
+            ArrivalDate = "2023-05-21",
+            ArrivalTime = "1:00"
+        });
+
         await dataContext.SaveChangesAsync();
     }
 
