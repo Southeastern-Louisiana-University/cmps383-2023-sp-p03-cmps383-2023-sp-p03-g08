@@ -12,7 +12,7 @@ import {useState} from 'react';
 import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
 import TrainStations from '../../pages/Stations/TrainStations';
 import TrainRoutes from '../../pages/Route/TrainRoutes';
-import Trips from '../../pages/Trips';
+import Trips from '../../pages/Trips/Trips';
 import TripBooking from '../../pages/TripBooking/TripBooking';
 import Home from '../../pages/Home';
 import Profile from '../../pages/Profile/Profile';
@@ -63,7 +63,7 @@ function NavBar() {
                 <Nav.Link as={Link} to={"/tripbooking"}><b>Book a Trip</b></Nav.Link>
                 <Nav.Link as={Link} to={"/trainstations"}>Train Stations</Nav.Link>
                 <Nav.Link as={Link} to={"/routes"}>Routes</Nav.Link>
-                <Nav.Link as={Link} to={"/trips"}>Trips</Nav.Link>
+                <Nav.Link as={Link} to={"/trips"}>Departures</Nav.Link>
                 <Nav.Link as={Link} to={"/trains"}>Trains</Nav.Link>
                 <Nav.Link as={Link} to={"/prices"}>Seating/Prices</Nav.Link>
                 <Nav.Link as={Link} to={"/about"}>About Us</Nav.Link>

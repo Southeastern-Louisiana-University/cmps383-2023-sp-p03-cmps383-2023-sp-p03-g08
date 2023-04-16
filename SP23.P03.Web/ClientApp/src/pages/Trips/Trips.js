@@ -1,11 +1,11 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import Placeholder from "../components/Placeholder";
+import GetTrips from "./GetTrips";
 function Trips() {
     return (
         <Container className="text-center">
-            <h1>Trips</h1>
-            <Placeholder />
+            <h1>Departures</h1>
+            <GetTrips/>
         </Container>
     );
 }
