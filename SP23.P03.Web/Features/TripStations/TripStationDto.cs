@@ -16,3 +16,9 @@ public class TripStationDto
     public string? ArrivalDate { get; set; } = string.Empty;
     public string? ArrivalTime { get; set; } = string.Empty;
 }
+
+public class TripStationEditDto
+{
+    public string? ArrivalDate { get; set; } = string.Empty;
+    public string? ArrivalTime { get; set; } = string.Empty;
+}

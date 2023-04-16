@@ -122,6 +122,28 @@ public class TripsController : ControllerBase
         
     }
 
+    [HttpPut("{tripid}/edittripstation/{tripstationid}")]
+    [Authorize(Roles = RoleNames.Admin)]
+    public ActionResult EditTripStationsOnTrip(int tripid, int tripstationid, TripStationEditDto dto)
+    {
+        var triptoedit = trips.Include(t => t.TripStations).FirstOrDefault(x => x.Id == tripid);
+        if (triptoedit == null)
+        {
+            return NotFound("Trip doesn't exist");
+        }
+
+        var tripstationtoedit = triptoedit.TripStations.FirstOrDefault(x => x.Id == tripstationid);
+        if (tripstationtoedit == null)
+        {
+            return NotFound("Trip station doesn't exist");
+        }
+
+        tripstationtoedit.ArrivalDate = dto.ArrivalDate;
+        tripstationtoedit.ArrivalTime = dto.ArrivalTime;
+        dataContext.SaveChanges();
+        return Ok(GetTripAndStationsDtos(trips.Where(x => x.Id == triptoedit.Id)));
+    }
+
     private static IQueryable<TripDto> GetTripAndStationsDtos(IQueryable<Trip> trips)
     {
         return trips.Select(x => new TripDto
