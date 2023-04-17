@@ -49,6 +49,17 @@ public class TripsController : ControllerBase
         return Ok(result);
     }
 
+    [HttpGet("finddeparture")]
+    public ActionResult FindATrain(FindTrainDto dto)
+    {
+        if (IsInvalid(dto))
+        {
+            return BadRequest();
+        }
+
+        return Ok();
+    }
+
     [HttpPost]
     [Authorize(Roles = RoleNames.Admin)]
     public ActionResult PostTrip(PostTripDto dto)
@@ -142,6 +153,13 @@ public class TripsController : ControllerBase
         tripstationtoedit.ArrivalTime = dto.ArrivalTime;
         dataContext.SaveChanges();
         return Ok(GetTripAndStationsDtos(trips.Where(x => x.Id == triptoedit.Id), routes));
+    }
+
+    private bool IsInvalid(FindTrainDto dto)
+    {
+        return string.IsNullOrWhiteSpace(dto.DepartLocation) || string.IsNullOrWhiteSpace(dto.DepartDate) ||
+            string.IsNullOrWhiteSpace(dto.ArrivalLocation) || string.IsNullOrWhiteSpace(dto.ArrivalDate);
+        //user might leave out depart time or end time so ok if its empty
     }
 
     private static IQueryable<TripDto> GetTripAndStationsDtos(IQueryable<Trip> trips, IQueryable<Route> routes)

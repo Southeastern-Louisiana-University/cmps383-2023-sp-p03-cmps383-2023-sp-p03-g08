@@ -29,3 +29,14 @@ public class PostTripDto
     public int RouteId { get; set; }
     public decimal BasePrice { get; set; }
 }
+
+public class FindTrainDto
+{
+    public string DepartLocation { get; set; } = string.Empty;
+    public string DepartDate { get; set; } = string.Empty;
+    public string DepartTime { get; set; } = string.Empty;
+
+    public string ArrivalLocation { get; set; } = string.Empty;
+    public string ArrivalDate { get; set; } = string.Empty;
+    public string ArrivalTime { get; set; } = string.Empty;
+}
