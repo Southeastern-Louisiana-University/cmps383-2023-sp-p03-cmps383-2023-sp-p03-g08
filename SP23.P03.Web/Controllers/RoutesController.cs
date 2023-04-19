@@ -28,9 +28,10 @@ public class RoutesController : ControllerBase
     }
 
     [HttpGet]
-    public IQueryable<RouteDto> GetRoutes()
+    public IQueryable<RouteAndStationsDto> GetRoutes()
     {
-        return GetRouteDtos(routes);
+        // return GetRouteDtos(routes);
+        return GetRouteAndStationsDtos(routes);
     }
 
     [HttpGet("{id}")]
@@ -189,7 +190,15 @@ public class RoutesController : ControllerBase
             Name = x.Name,
             Description = x.Description,
             Order = x.Order,
-            TrainStations = x.TrainStations //works but exposes too much info. need dto
+            TrainStations = x.TrainStations.Select(x => new TrainStationDto
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Address = x.Address,
+                City = x.City,
+                State = x.State,
+                ManagerId = x.ManagerId
+            }).ToList()
         });
     }
 }

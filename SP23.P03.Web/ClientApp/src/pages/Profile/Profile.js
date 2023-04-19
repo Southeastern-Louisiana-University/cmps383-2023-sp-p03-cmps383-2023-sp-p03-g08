@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, ListGroupItem } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import AuthService from "../../services/AuthService";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
@@ -7,8 +7,8 @@ import axios from "axios";
 import Placeholder from "../../components/Placeholder";
 import profileperson from "./profileperson.svg";
 import Card from "react-bootstrap/Card";
-import ListGroup from "react-bootstrap/ListGroup";
 import ticket from "./ticket.svg";
+import barcode from "./barcode.jpg";
 function Profile() {
     const currentUser = AuthService.getCurrentUser();
     const navigate = useNavigate();
@@ -21,13 +21,16 @@ function Profile() {
         );
     }
     async function logOut() {
+        localStorage.removeItem("user");
+        navigate("/");
+        window.location.reload();
         await axios.post("/api/authentication/logout")
         .then(function(response) {
           if (response.status === 200) {
                 console.log("It's 200");
-                localStorage.removeItem("user");
-                navigate("/");
-                window.location.reload()
+            //    localStorage.removeItem("user");
+            //    navigate("/");
+           //     window.location.reload()
                 console.log(response.data);
             }
         })
@@ -47,12 +50,20 @@ function Profile() {
                     Your Booked Tickets
                   </h5> 
                 </Card.Text>
-                <ListGroup style={{textAlign: 'left'}}>
-                    <ListGroupItem>Ticket</ListGroupItem>
-                    <ListGroupItem>data</ListGroupItem>
-                    <ListGroupItem>goes</ListGroupItem>
-                    <ListGroupItem>here</ListGroupItem>
-                </ListGroup>
+                <Card style={{ width: '18rem', padding: '10px'}}>
+                    <Card.Header>Ticket #57244</Card.Header>
+                    <Card.Body>
+                        <Card.Text>
+                            Date Booked: 05/20/23<br/>
+                            From: Hammond, LA - 05/30/23<br/>
+                            To: Houston, TX - 05/30/23<br/>
+                            Train: Siemens Charger #5<br/>
+                            Seat: Coach<br/>
+                            $150 <br/>
+                            <img src={barcode} alt="ticket" width="125px" height="70px" style={{margin: '10px'}}/>
+                        </Card.Text>
+                    </Card.Body>
+                </Card>
                 <Button variant="danger" onClick={logOut} style={{marginTop: '20px'}}>Log Out</Button>
             </Card.Body>
         </Card>
