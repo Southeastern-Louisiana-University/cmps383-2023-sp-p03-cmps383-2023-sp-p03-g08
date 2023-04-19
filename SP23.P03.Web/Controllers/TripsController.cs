@@ -72,14 +72,20 @@ public class TripsController : ControllerBase
 
         // return Ok(GetTripAndStationsDtos(tripsandstations.Where(x => x.TripStations.Exists(x => x.State == dto.DepartLocation && x.ArrivalDate == dto.DepartDate && x.ArrivalTime == dto.DepartTime) && x.TripStations.Exists(x => x.State == dto.ArrivalLocation && x.ArrivalDate == dto.ArrivalDate && x.ArrivalTime == dto.ArrivalTime)), routes));
         //return Ok(tripsandstations.AsEnumerable().Where(x => x.TripStations.Exists(x => x.State == dto.DepartLocation && x.ArrivalDate == dto.DepartDate && x.ArrivalTime == dto.DepartTime) && x.TripStations.Exists(x => x.State == dto.ArrivalLocation && x.ArrivalDate == dto.ArrivalDate && x.ArrivalTime == dto.ArrivalTime))); //closer: JSON 500 cycle error, works
-        return Ok(GetSearchTripAndStationDtos(tripsandstations
+        /*return Ok(GetSearchTripAndStationDtos(tripsandstations
             .AsEnumerable()
             .Where(x => x.TripStations
             .Exists(x => x.State == dto.DepartLocation && x.ArrivalDate == dto.DepartDate && x.ArrivalTime == dto.DepartTime) 
             && x.TripStations
-            .Exists(x => x.State == dto.ArrivalLocation && x.ArrivalDate == dto.ArrivalDate && x.ArrivalTime == dto.ArrivalTime)).ToList(), routes));
-        //make case for cities, return statement if no trips are found, and if user leaves times null
-        
+            .Exists(x => x.State == dto.ArrivalLocation && x.ArrivalDate == dto.ArrivalDate && x.ArrivalTime == dto.ArrivalTime)).ToList(), routes));*/
+        return Ok(GetSearchTripAndStationDtos(tripsandstations
+            .AsEnumerable()
+            .Where(x => x.TripStations
+            .Exists(x => x.City == dto.DepartLocation && x.ArrivalDate == dto.DepartDate && x.ArrivalTime == dto.DepartTime)
+            && x.TripStations
+            .Exists(x => x.City == dto.ArrivalLocation && x.ArrivalDate == dto.ArrivalDate && x.ArrivalTime == dto.ArrivalTime)).ToList(), routes));
+        //make case for states/stations, return statement if no trips are found, and if user leaves times null
+
     }
 
     [HttpPost]
