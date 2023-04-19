@@ -7,7 +7,8 @@ import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import magglass from "./search.svg";
-import {useState, useEffect} from "react";
+import SearchTrips from "./SearchTrips";
+import {useState} from "react";
 
 function Tickets() {
     const [searchtrips, setSearchTrips] = useState();
@@ -99,6 +100,7 @@ function Tickets() {
             <Button type="submit" style={{margin: '15px'}} size="lg">
                 <img src={magglass} alt="glass" style={{paddingRight: '10px'}}/>Search</Button>
             </Form>
+            <div>{searchtrips ? <SearchTrips searchtrips={searchtrips} /> : null}</div>
         </Container>
     );
 }
