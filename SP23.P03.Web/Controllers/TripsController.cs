@@ -57,19 +57,6 @@ public class TripsController : ControllerBase
             return BadRequest();
         }
 
-        var startstation = new TripStation
-        {
-            State = dto.DepartLocation,
-            ArrivalDate = dto.DepartDate,
-            ArrivalTime = dto.DepartTime
-        };
-        var endstation = new TripStation
-        {
-            State = dto.ArrivalLocation,
-            ArrivalDate = dto.ArrivalDate,
-            ArrivalTime = dto.ArrivalTime
-        };
-
         var tripsandstations = trips.Include(t => t.TripStations);
         /*     var foundtripsandstations = tripsandstations.Where(x => x.TripStations.Contains(startstation) && x.TripStations.Contains(endstation)).ToList();
 
