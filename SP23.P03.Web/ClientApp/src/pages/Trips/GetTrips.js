@@ -45,24 +45,35 @@ function GetTrips() {
                                 <Card.Text className="text-start">
                                     <h4><i>Amenities/Seating Available:</i></h4>
                                     <Row>
-                                        <Col>{trip.coachSeatsLeft > 0 && 
+                                        <Col>{trip.coachSeatsLeft > 0 ?
                                               <div><h5>Coach</h5>
                                                 <Button>Book</Button>
-                                              </div>}</Col>
-                                        <Col>{trip.firstClassSeatsLeft > 0 && 
+                                              </div> : 
+                                              <div><h5><s>Coach</s></h5>
+                                              <Button disabled>Book</Button>
+                                            </div>}</Col>
+                                        <Col>{trip.firstClassSeatsLeft > 0 ?
                                                 <div><h5>First Class</h5>
                                                     <Button>Book</Button>
-                                                </div>}</Col>
-                                        <Col>{trip.sleepersLeft > 0 && 
+                                                </div> : 
+                                                <div><h5><s>First Class</s></h5>
+                                                <Button disabled>Book</Button>
+                                            </div>}</Col>
+                                        <Col>{trip.sleepersLeft > 0 ?
                                                 <div><h5>Sleeper</h5> 
                                                     <Button>Book</Button>
+                                                </div> : <div><h5><s>Sleeper</s></h5> 
+                                                    <Button disabled>Book</Button>
                                                 </div>}</Col>
-                                        <Col>{trip.roomletsLeft > 0 && 
+                                        <Col>{trip.roomletsLeft > 0 ? 
                                                 <div><h5>Roomlet</h5>
                                                     <Button>Book</Button>
+                                                </div> : <div><h5><s>Roomlet</s></h5>
+                                                    <Button disabled>Book</Button>
                                                 </div>}</Col>
-                                        <Col>{trip.dining === 'true' && 
-                                                <div><h5>Dining</h5></div>}</Col>
+                                        <Col>{trip.dining === 'true' ?
+                                                <div><h5>Dining</h5></div> :
+                                                <div><h5><s>Dining</s></h5></div>}</Col>
                                         <Col>
                                             <h4>Starting At</h4>
                                             <h2><Badge pill bg="info">${trip.coachPrice + trip.basePrice}</Badge></h2>
