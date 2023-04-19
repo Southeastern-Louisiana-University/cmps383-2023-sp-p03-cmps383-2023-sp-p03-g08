@@ -9,11 +9,9 @@ import Button from "react-bootstrap/Button";
 import magglass from "./search.svg";
 import SearchTrips from "./SearchTrips";
 import {useState} from "react";
-
 function Tickets() {
     const [searchtrips, setSearchTrips] = useState();
     async function getSearchTrips(e) {
-        
         e.preventDefault();
         const departlocation = e.target.departlocation.value;
         const departdate = e.target.departdate.value;
@@ -22,8 +20,8 @@ function Tickets() {
         const arrivallocation = e.target.arrivallocation.value;
         const arrivaldate = e.target.arrivaldate.value;
         const arrivaltime = e.target.arrivaltime.value;
-        alert("Start place is " + departlocation + ", depart date is " + departdate + ", depart time is " + departtime + "\nEnd place is " +
-        arrivallocation + ", arrival date is " + arrivaldate + ", arrival time is " + arrivaltime);
+      /*  alert("Start place is " + departlocation + ", depart date is " + departdate + ", depart time is " + departtime + "\nEnd place is " +
+        arrivallocation + ", arrival date is " + arrivaldate + ", arrival time is " + arrivaltime);*/
     
         await axios.post("/api/trips/finddeparture", 
         {departlocation, departdate, departtime, arrivallocation, arrivaldate, arrivaltime})

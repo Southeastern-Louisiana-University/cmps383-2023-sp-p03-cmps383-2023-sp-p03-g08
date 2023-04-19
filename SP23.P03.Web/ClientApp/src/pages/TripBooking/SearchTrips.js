@@ -9,11 +9,25 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Accordion from 'react-bootstrap/Accordion';
 import Badge from 'react-bootstrap/Badge';
+//import { useNavigate } from "react-router-dom";
 function SearchTrips({searchtrips}) {
+  //  const navigate = useNavigate();
+    function convertTime(militarytime) {
+        var time = militarytime.split(":");
+        var hours = time[0];
+        var minutes = time[1];
+        var timeValue = "" + ((hours > 12) ? hours -12 :hours);
+        timeValue += (minutes < 10) ? ":00" : ":" + minutes;
+        timeValue += (hours >= 12) ? " PM" : " AM";
+        return timeValue;
+    }
+    /*function navtest() {
+        navigate("/");
+    }*/
     function tripStations(obj) {
         var ts = [];
         for (let i = 0; i < obj.length; i++) {
-            ts.push(<ListGroup.Item>{obj[i].city + ", " + obj[i].state + ": " + obj[i].arrivalDate + ", " + obj[i].arrivalTime}</ListGroup.Item>)
+            ts.push(<ListGroup.Item>{obj[i].city + ", " + obj[i].state + ": " + obj[i].arrivalDate + ", " + convertTime(obj[i].arrivalTime)}</ListGroup.Item>)
         }
         return ts;
     }
@@ -22,7 +36,7 @@ function SearchTrips({searchtrips}) {
             {searchtrips ? (
                 searchtrips.map((searchtrip) => {
                     return (
-                        <Card key={searchtrip.id}>
+                        <Card key={searchtrip.id} /*onClick={() => navtest()}*/>
                             <Card.Body>
                                 <Card.Title>Travelling the {searchtrip.routeName} Route </Card.Title>
                                 <Card.Text className="text-start">

@@ -4,7 +4,7 @@ import GetTrips from "./GetTrips";
 function Trips() {
     return (
         <Container className="text-center">
-            <h1>Departures</h1>
+            <h1>Upcoming Departures</h1>
             <GetTrips/>
         </Container>
     );

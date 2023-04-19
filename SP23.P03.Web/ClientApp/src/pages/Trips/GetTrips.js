@@ -9,10 +9,20 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Accordion from 'react-bootstrap/Accordion';
 import Badge from 'react-bootstrap/Badge';
+
+function convertTime(militarytime) {
+    var time = militarytime.split(":");
+    var hours = time[0];
+    var minutes = time[1];
+    var timeValue = "" + ((hours > 12) ? hours -12 :hours);
+    timeValue += (minutes < 10) ? ":00" : ":" + minutes;
+    timeValue += (hours >= 12) ? " PM" : " AM";
+    return timeValue;
+}
 function tripStations(obj) {
     var ts = [];
     for (let i = 0; i < obj.length; i++) {
-        ts.push(<ListGroup.Item>{obj[i].city + ", " + obj[i].state + ": " + obj[i].arrivalDate + ", " + obj[i].arrivalTime}</ListGroup.Item>)
+        ts.push(<ListGroup.Item>{obj[i].city + ", " + obj[i].state + ": " + obj[i].arrivalDate + ", " + convertTime(obj[i].arrivalTime)}</ListGroup.Item>)
     }
     return ts;
 }

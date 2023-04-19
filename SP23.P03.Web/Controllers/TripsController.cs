@@ -78,6 +78,7 @@ public class TripsController : ControllerBase
             .Exists(x => x.State == dto.DepartLocation && x.ArrivalDate == dto.DepartDate && x.ArrivalTime == dto.DepartTime) 
             && x.TripStations
             .Exists(x => x.State == dto.ArrivalLocation && x.ArrivalDate == dto.ArrivalDate && x.ArrivalTime == dto.ArrivalTime)).ToList(), routes));
+        //make case for cities, return statement if no trips are found, and if user leaves times null
         
     }
 
