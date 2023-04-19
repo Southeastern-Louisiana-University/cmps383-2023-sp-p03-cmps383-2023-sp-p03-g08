@@ -13,6 +13,8 @@ public class TrainStationConfiguration : IEntityTypeConfiguration<TrainStation>
 
         builder.Property(x => x.Address)
             .IsRequired();
+        builder.Property(x => x.City).IsRequired();
+        builder.Property(x => x.State).IsRequired();
 
         builder.HasOne(x => x.Manager)
             .WithMany(x => x.ManageStations)
