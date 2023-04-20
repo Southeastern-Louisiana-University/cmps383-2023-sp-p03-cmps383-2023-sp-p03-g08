@@ -8,6 +8,10 @@ import image4 from '../pages/Trips/383 Images/image4.jpg';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Placeholder from "../components/Placeholder";
+import video from "../pages/Trips/383 Images/rails-3639.mp4"
+import train from "../pages/Trips/383 Images/train3.png"
+import "../pages/Trips/Home.css"
+
 
 
 function Home() {
@@ -51,7 +55,20 @@ function Home() {
         </Carousel.Caption>
       </Carousel.Item>
             </Carousel>
+
             <Placeholder/>
+
+            <div className="homeImages flex">
+                <div className="videoDiv">
+                    <video src={video} autoPlay muted loop className='video'></video>
+                </div>
+
+                
+
+                <img src={train} className='train' />
+            </div>
+                
+           <Placeholder/>
             <div>
 
              

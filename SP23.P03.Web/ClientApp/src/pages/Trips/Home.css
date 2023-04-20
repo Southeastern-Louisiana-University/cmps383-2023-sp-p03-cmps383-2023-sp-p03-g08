@@ -1,0 +1,30 @@
+﻿/* Homepage styling*/
+
+.homeImages {
+    width: 100%;
+    margin: 1rem auto 0;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    border-radius: 5rem;
+    .videoDiv
+
+{
+    width: 100%;
+    .video
+
+{
+    border-radius: 10rem;
+}
+
+}
+
+.train {
+    position: absolute;
+    width: 65%;
+    bottom: 4%;
+    right: 50px;
+    left: 10%;
+    transform: rotate(345deg);
+}
+}
