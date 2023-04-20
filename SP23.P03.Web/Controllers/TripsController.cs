@@ -237,6 +237,7 @@ public class TripsController : ControllerBase
             SleepersLeft = x.SleepersLeft,
             SleeperPrice = x.SleeperPrice,
             RoomletsLeft = x.RoomletsLeft,
+            RoomletsPrice = x.RoomletsPrice,
             Dining = x.Dining,
             BasePrice = x.BasePrice,
             TripStations = x.TripStations.Select(x => new TripStationDto
