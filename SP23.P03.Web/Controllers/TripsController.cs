@@ -57,34 +57,21 @@ public class TripsController : ControllerBase
             return BadRequest();
         }
 
-        var tripsandstations = trips.Include(t => t.TripStations);
-        /*     var foundtripsandstations = tripsandstations.Where(x => x.TripStations.Contains(startstation) && x.TripStations.Contains(endstation)).ToList();
-
-         //    var foundtripsandstations = trips.Include(t => t.TripStations).Where(x => x.TripStations.Contains(startstation) && x.TripStations.Contains(endstation)).ToList();
-
-              if (foundtripsandstations.Count == 0)
-              {
-                  return NotFound("No trips match the search.");
-              }
-
-              return Ok(GetTripAndStationsDtos(foundtripsandstations, routes));
-             //return Ok(GetTripAndStationsDtos(tripsandstations, routes)); no errors*/
-
-        // return Ok(GetTripAndStationsDtos(tripsandstations.Where(x => x.TripStations.Exists(x => x.State == dto.DepartLocation && x.ArrivalDate == dto.DepartDate && x.ArrivalTime == dto.DepartTime) && x.TripStations.Exists(x => x.State == dto.ArrivalLocation && x.ArrivalDate == dto.ArrivalDate && x.ArrivalTime == dto.ArrivalTime)), routes));
-        //return Ok(tripsandstations.AsEnumerable().Where(x => x.TripStations.Exists(x => x.State == dto.DepartLocation && x.ArrivalDate == dto.DepartDate && x.ArrivalTime == dto.DepartTime) && x.TripStations.Exists(x => x.State == dto.ArrivalLocation && x.ArrivalDate == dto.ArrivalDate && x.ArrivalTime == dto.ArrivalTime))); //closer: JSON 500 cycle error, works
-        /*return Ok(GetSearchTripAndStationDtos(tripsandstations
+        var foundtripstations = trips.Include(t => t.TripStations)
             .AsEnumerable()
-            .Where(x => x.TripStations
-            .Exists(x => x.State == dto.DepartLocation && x.ArrivalDate == dto.DepartDate && x.ArrivalTime == dto.DepartTime) 
-            && x.TripStations
-            .Exists(x => x.State == dto.ArrivalLocation && x.ArrivalDate == dto.ArrivalDate && x.ArrivalTime == dto.ArrivalTime)).ToList(), routes));*/
-        return Ok(GetSearchTripAndStationDtos(tripsandstations
-            .AsEnumerable()
-            .Where(x => x.TripStations
-            .Exists(x => x.City == dto.DepartLocation && x.ArrivalDate == dto.DepartDate && x.ArrivalTime == dto.DepartTime)
-            && x.TripStations
-            .Exists(x => x.City == dto.ArrivalLocation && x.ArrivalDate == dto.ArrivalDate && x.ArrivalTime == dto.ArrivalTime)).ToList(), routes));
-        //make case for states/stations, return statement if no trips are found, and if user leaves times null
+            .Where(x => x.TripStations.Exists
+            (x => (x.City == dto.DepartLocation || x.Name == dto.DepartLocation || x.State == dto.DepartLocation) 
+            && x.ArrivalDate == dto.DepartDate)
+            && x.TripStations.Exists
+            (x => (x.City == dto.ArrivalLocation || x.Name == dto.ArrivalLocation || x.State == dto.ArrivalLocation) 
+            && x.ArrivalDate == dto.ArrivalDate)).ToList();
+
+     /*   if (foundtripstations.Count == 0)
+        {
+            return NotFound();
+        }*/
+
+        return Ok(GetSearchTripAndStationDtos(foundtripstations, routes));
 
     }
 
@@ -187,7 +174,6 @@ public class TripsController : ControllerBase
     {
         return string.IsNullOrWhiteSpace(dto.DepartLocation) || string.IsNullOrWhiteSpace(dto.DepartDate) ||
             string.IsNullOrWhiteSpace(dto.ArrivalLocation) || string.IsNullOrWhiteSpace(dto.ArrivalDate);
-        //user might leave out depart time or end time so ok if its empty
     }
 
     private static IEnumerable<TripDto> GetSearchTripAndStationDtos(IEnumerable<Trip> trips, IQueryable<Route> routes)

@@ -5,7 +5,6 @@ import Placeholder from "../components/Placeholder";
 function Home() {
     return (
        <Container className="text-center">
-            <h1>Welcome to EnTrack!</h1>
             <Placeholder />
        </Container>
     );

@@ -15,16 +15,14 @@ function Tickets() {
         e.preventDefault();
         const departlocation = e.target.departlocation.value;
         const departdate = e.target.departdate.value;
-        const departtime = e.target.departtime.value;
     
         const arrivallocation = e.target.arrivallocation.value;
         const arrivaldate = e.target.arrivaldate.value;
-        const arrivaltime = e.target.arrivaltime.value;
       /*  alert("Start place is " + departlocation + ", depart date is " + departdate + ", depart time is " + departtime + "\nEnd place is " +
         arrivallocation + ", arrival date is " + arrivaldate + ", arrival time is " + arrivaltime);*/
     
         await axios.post("/api/trips/finddeparture", 
-        {departlocation, departdate, departtime, arrivallocation, arrivaldate, arrivaltime})
+        {departlocation, departdate, arrivallocation, arrivaldate})
         .then(function(response) {
             if (response.status === 200) {
                 console.log("It's 200");
@@ -56,13 +54,6 @@ function Tickets() {
                                 </Form.Group>
                                 </Col>
                             </Row>
-                            <br/>
-                            <Row>
-                                <Form.Group>
-                                    <Form.Label>Depart Time</Form.Label>
-                                    <Form.Control type="time" name="departtime"/>
-                                </Form.Group>
-                            </Row>
                         </Card.Body>
                     </Card>
                 </Col>
@@ -84,13 +75,6 @@ function Tickets() {
                                 </Form.Group>
                                 </Col>
                             </Row>
-                            <br/>
-                            <Row>
-                                <Form.Group>
-                                    <Form.Label>Arrival Time</Form.Label>
-                                    <Form.Control type="time" name="arrivaltime"/>
-                                </Form.Group>
-                            </Row>
                         </Card.Body>
                     </Card>
                 </Col>
@@ -98,7 +82,7 @@ function Tickets() {
             <Button type="submit" style={{margin: '15px'}} size="lg">
                 <img src={magglass} alt="glass" style={{paddingRight: '10px'}}/>Search</Button>
             </Form>
-            <div>{searchtrips ? <SearchTrips searchtrips={searchtrips} /> : null}</div>
+            {searchtrips ? <SearchTrips searchtrips={searchtrips} /> : null}
         </Container>
     );
 }
