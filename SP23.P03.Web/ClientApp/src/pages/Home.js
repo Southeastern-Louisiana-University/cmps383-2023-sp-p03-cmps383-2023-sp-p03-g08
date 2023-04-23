@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState} from "react";
 import { Container } from "react-bootstrap";
 import Carousel from 'react-bootstrap/Carousel';
 import image1 from '../pages/Trips/383 Images/image1.jpg';
@@ -7,14 +7,14 @@ import image3 from '../pages/Trips/383 Images/image3.jpg';
 import image4 from '../pages/Trips/383 Images/image4.jpg';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Placeholder from "../components/Placeholder";
-import video from "../pages/Trips/383 Images/rails-3639.mp4"
-import train from "../pages/Trips/383 Images/train3.png"
-import "../pages/Trips/Home.css"
+import Alert from 'react-bootstrap/Alert';
+import Button from 'react-bootstrap/Button';
+
 
 
 
 function Home() {
+    const [show, setShow] = useState(false);
     return (
        <Container className="text-center">
             <h1>Welcome to EnTrack!</h1>
@@ -26,8 +26,8 @@ function Home() {
           alt="First slide"
         />
         <Carousel.Caption>
-          <h5>Enjoy a more rewarding travel</h5>
-          <p>Book Tickets and Earn Points</p>
+          <h5 className="s1"> Enjoy a more rewarding travel</h5>
+          <p className="s11">Book Tickets and Earn Points</p>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
@@ -37,8 +37,8 @@ function Home() {
           alt="Second slide"
         />
         <Carousel.Caption>
-          <h5>Limited Time Offer</h5>
-          <p>Specisl Travel 75000 bonus miles </p>
+          <h5 className="s2"> Limited Time Offer</h5>
+          <p className="s22">Specisl Travel 75000 bonus miles </p>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
@@ -48,28 +48,18 @@ function Home() {
           alt="Third slide"
         />
         <Carousel.Caption>
-          <h5>Visit National Parks</h5>
-          <p>
+          <h5 className="s3"> Visit National Parks</h5>
+          <p className="s33">
             Find low prices and book today!
           </p>
         </Carousel.Caption>
       </Carousel.Item>
             </Carousel>
-
-            <Placeholder/>
-
-            <div className="homeImages flex">
-                <div className="videoDiv">
-                    <video src={video} autoPlay muted loop className='video'></video>
-                </div>
-
-                
-
-                <img src={train} className='train' />
-            </div>
-                
-           <Placeholder/>
+          
+          
             <div>
+
+                
 
              
                     <h1>Supporting You Through Your Journey</h1>
@@ -82,9 +72,10 @@ function Home() {
                             className="d-block w-100"
                             src={image3}
                             alt="Third slide"
+                           
                             />
-                            Ready for an Adventure?
-
+                           
+                            <b>Travel Confidently with the Mapp</b>
                         </Col>
                         <Col xs>
                              <img
@@ -92,7 +83,23 @@ function Home() {
                                 src={image3}
                                 alt="Third slide"
                             />
-                            Explore Destinations and Travel Requirements
+                            <>
+                            <Alert show={show} variant="secondary">
+                                <Alert.Heading>Travel Requirements</Alert.Heading>
+                                <p>
+                                        Make sure you have all required travel documents, including your valid ID. Some places have also imposed temporary health-related entry requirements.
+                                </p>
+                                <hr />
+                                <div className="d-flex justify-content-end">
+                                    <Button onClick={() => setShow(false)} variant="outline-success">
+                                        Close 
+                                    </Button>
+                                </div>
+                            </Alert>
+
+                                {!show && <Button onClick={() => setShow(true)} variant="outline-secondary">Explore Destinations and Travel Requirements</Button>}
+                        </>
+                            
                         </Col>
                         <Col xs={{ order: 'first' }}>
 
@@ -101,15 +108,22 @@ function Home() {
                                 src={image3}
                                 alt="Third slide"
                             />
-                            Travel with confidence with the app
+                            
+                            <b>Ready for an    <a href="/tripbooking">adventure </a>?</b> 
 
                         </Col>
                 </Row>
                 </Container>
             </div>
+
+
+
+
+          
             
        </Container>
     );
 }
 
 export default Home;
+
