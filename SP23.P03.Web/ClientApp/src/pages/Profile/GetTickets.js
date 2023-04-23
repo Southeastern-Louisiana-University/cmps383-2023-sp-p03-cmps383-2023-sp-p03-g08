@@ -22,7 +22,6 @@ function GetTickets({userId}) {
                     <Card.Header>Ticket Details</Card.Header>
                     <Card.Body>
                         <Card.Text>
-                            Date Booked: 05/20/23<br/>
                             From: {ticket.departLocation} - {ticket.departDate}<br/>
                             To: {ticket.arrivalLocation} - {ticket.arrivalDate}<br/>
                             Train: Siemens Charger<br/>

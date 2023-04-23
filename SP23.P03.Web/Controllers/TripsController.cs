@@ -60,10 +60,10 @@ public class TripsController : ControllerBase
         var foundtripstations = trips.Include(t => t.TripStations)
             .AsEnumerable()
             .Where(x => x.TripStations.Exists
-            (x => (x.City == dto.DepartLocation || x.Name == dto.DepartLocation || x.State == dto.DepartLocation) 
+            (x => (x.City == dto.DepartLocation.Trim() || x.Name == dto.DepartLocation.Trim() || x.State == dto.DepartLocation.Trim()) 
             && x.ArrivalDate == dto.DepartDate)
             && x.TripStations.Exists
-            (x => (x.City == dto.ArrivalLocation || x.Name == dto.ArrivalLocation || x.State == dto.ArrivalLocation) 
+            (x => (x.City == dto.ArrivalLocation.Trim() || x.Name == dto.ArrivalLocation.Trim() || x.State == dto.ArrivalLocation.Trim()) 
             && x.ArrivalDate == dto.ArrivalDate)).ToList();
 
      /*   if (foundtripstations.Count == 0)

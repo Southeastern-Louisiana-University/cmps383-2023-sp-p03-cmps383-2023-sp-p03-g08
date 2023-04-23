@@ -9,16 +9,8 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Accordion from 'react-bootstrap/Accordion';
 import Badge from 'react-bootstrap/Badge';
-//import Modal from "react-bootstrap/Modal";
 import BookingModal from "./BookingModal";
 function SearchTrips({searchtrips, deploc, depdate, arrloc, arrdate}) {
-   /* const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);*/
-
-   /* function pay(searchtrip) {
-        setShow(true);
-    }*/
     function convertTime(militarytime) {
         var time = militarytime.split(":");
         var hours = time[0];

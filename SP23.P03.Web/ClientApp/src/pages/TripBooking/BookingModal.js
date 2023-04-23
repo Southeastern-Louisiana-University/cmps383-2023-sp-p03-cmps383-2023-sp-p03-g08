@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from "react-bootstrap/Form";
 import AuthService from '../../services/AuthService';
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function BookingModal({deploc, depdate, arrloc, arrdate, searchtrip}) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const navigate = useNavigate();
 
   const currentUser = AuthService.getCurrentUser();
   async function buyTicket(e) {
@@ -26,6 +28,11 @@ function BookingModal({deploc, depdate, arrloc, arrdate, searchtrip}) {
     .then(function(response) {
         if (response.status === 200) {
           console.log("It's 200");
+          console.log(response.data);
+          navigate("/profile");
+        }
+        if (response.status === 400) {
+          console.log("It's 400");
           console.log(response.data);
         }
       })
@@ -44,17 +51,17 @@ function BookingModal({deploc, depdate, arrloc, arrdate, searchtrip}) {
         backdrop="static"
         keyboard={false}
       >
-        <Modal.Header>
-          <Modal.Title>Booking Confirmation</Modal.Title>
+        <Modal.Header closeButton>
+          <Modal.Title><b>Booking Confirmation</b></Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          From {deploc} on : {depdate}<br/>
-          To {arrloc} on : {arrdate}<br/>
+          From {deploc} on {depdate}<br/>
+          To {arrloc} on {arrdate}<br/>
           Seat: Coach - ${searchtrip.coachPrice + searchtrip.basePrice}
           <Form onSubmit={buyTicket} style={{paddingTop: '15px'}}>
                 <Form.Group className="mb-3" controlId="formBasicUserName">
                     <Form.Label>Card Holder's Name</Form.Label>
-                    <Form.Control type="username" placeholder="Enter Username" name="name"/>
+                    <Form.Control type="username" placeholder="Enter Card Holder's Name" name="name"/>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Card Number</Form.Label>
@@ -65,12 +72,6 @@ function BookingModal({deploc, depdate, arrloc, arrdate, searchtrip}) {
                 </div>
                 </Form>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary">Understood</Button>
-        </Modal.Footer>
       </Modal>
     </>
   );

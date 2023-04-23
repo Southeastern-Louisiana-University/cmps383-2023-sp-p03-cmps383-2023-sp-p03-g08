@@ -34,12 +34,13 @@ function Tickets() {
                 console.log(response.data);
                 setSearchTrips(response.data);
                 setDepLoc(departlocation);
-                console.log(deploc);
                 setDepDate(departdate);
-                console.log(depdate);
                 setArrLoc(arrivallocation);
-                console.log(arrloc)
                 setArrDate(arrivaldate);
+
+                console.log(deploc);
+                console.log(depdate);
+                console.log(arrloc);
                 console.log(arrdate);
             }
         }).catch((err) => {console.log(err)});
