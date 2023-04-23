@@ -46,7 +46,6 @@ public class TicketController : ControllerBase
 
         var ticket = new Ticket
         {
-            TripId = dto.TripId,
             UserId = dto.UserId,
             Price = dto.Price,
             SeatType = dto.SeatType,
@@ -60,7 +59,6 @@ public class TicketController : ControllerBase
         var returnticket = new TicketDto
         {
             Id = ticket.Id,
-            TripId = ticket.TripId,
             UserId = ticket.UserId,
             Price = ticket.Price,
             SeatType = ticket.SeatType,
@@ -86,9 +84,9 @@ public class TicketController : ControllerBase
             .Select(x => new TicketDto
             {
                 Id = x.Id,
-                TripId = x.TripId,
                 UserId = x.UserId,
                 Price = x.Price,
+                SeatType = x.SeatType,
                 DepartLocation = x.DepartLocation,
                 DepartDate = x.DepartDate,
                 ArrivalLocation = x.ArrivalLocation,

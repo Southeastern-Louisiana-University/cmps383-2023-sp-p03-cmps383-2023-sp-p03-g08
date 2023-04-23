@@ -14,7 +14,6 @@ function BookingModal({deploc, depdate, arrloc, arrdate, searchtrip}) {
   const currentUser = AuthService.getCurrentUser();
   async function buyTicket(e) {
     e.preventDefault();
-    const tripid = searchtrip.id;
     const userid = currentUser.id;
     const price = searchtrip.coachPrice + searchtrip.basePrice;
     const seattype = "Coach";
@@ -22,7 +21,7 @@ function BookingModal({deploc, depdate, arrloc, arrdate, searchtrip}) {
     const departdate = depdate;
     const arrivallocation = arrloc;
     const arrivaldate = arrdate;
-    await axios.post("api/tickets", {tripid, userid, price, seattype, departlocation, departdate, 
+    await axios.post("api/tickets", {userid, price, seattype, departlocation, departdate, 
     arrivallocation, arrivaldate})
     .then(function(response) {
         if (response.status === 200) {

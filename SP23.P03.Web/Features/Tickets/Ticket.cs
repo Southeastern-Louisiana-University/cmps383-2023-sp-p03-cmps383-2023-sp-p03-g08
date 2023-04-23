@@ -5,8 +5,6 @@ namespace SP23.P03.Web.Features.Tickets;
 public class Ticket
 {
     public int Id { get; set; }
-    public int TripId { get; set; }
-    public Trip Trip { get; set; }
     public int? UserId { get; set; }
     public decimal Price { get; set; }
     public string SeatType { get; set; } = string.Empty;

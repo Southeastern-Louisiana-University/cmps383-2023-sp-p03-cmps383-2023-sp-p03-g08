@@ -6,7 +6,6 @@ public class TicketConfig : IEntityTypeConfiguration<Ticket>
 {
     public void Configure(EntityTypeBuilder<Ticket> builder)
     {
-        builder.Property(x => x.TripId).IsRequired();
         //userId?
         builder.Property(x => x.Price).IsRequired();
         builder.Property(x => x.SeatType).IsRequired();

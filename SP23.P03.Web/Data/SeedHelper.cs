@@ -626,7 +626,6 @@ public static class SeedHelper
 
         tickets.Add(new Ticket
         {
-            TripId = 1,
             UserId = 2,
             Price = 270,
             SeatType = "First Class",
