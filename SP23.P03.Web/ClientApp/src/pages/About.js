@@ -24,14 +24,14 @@ function About() {
 
                     </Col>
                     <Col>
-                        <div className="homeImages flex">
+                        <div className="homeImages flex" >
                             <div className="videoDiv">
-                                <video src={video} autoPlay muted loop className='video'></video>
+                                <video src={video} autoPlay muted loop className='video' alt='backgroundvideo'></video>
                             </div>
 
 
 
-                            <img src={train} className='train' />
+                            <img src={train} className='train' alt="train" />
                         </div>
                     </Col>
                 </Row>
