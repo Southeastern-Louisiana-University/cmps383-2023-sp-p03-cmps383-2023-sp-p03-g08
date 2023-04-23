@@ -306,7 +306,13 @@ namespace SP23.P03.Web.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Capacity")
+                    b.Property<int>("CoachCapacity")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Dining")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("FirstClassCapacity")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -314,9 +320,113 @@ namespace SP23.P03.Web.Migrations
                         .HasMaxLength(75)
                         .HasColumnType("nvarchar(75)");
 
+                    b.Property<int>("RoomletCapacity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SleeperCapacity")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("Train");
+                });
+
+            modelBuilder.Entity("SP23.P03.Web.Features.TripStations.TripStation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ArrivalDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ArrivalTime")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TrainStationId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TripId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TrainStationId");
+
+                    b.HasIndex("TripId");
+
+                    b.ToTable("TripStation");
+                });
+
+            modelBuilder.Entity("SP23.P03.Web.Features.Trips.Trip", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("BasePrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("CoachPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("CoachSeatsLeft")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Dining")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal>("FirstClassPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("FirstClassSeatsLeft")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoomletsLeft")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("RoomletsPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("RouteId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("SleeperPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("SleepersLeft")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TrainId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RouteId");
+
+                    b.HasIndex("TrainId");
+
+                    b.ToTable("Trip");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -398,6 +508,44 @@ namespace SP23.P03.Web.Migrations
                     b.Navigation("Manager");
                 });
 
+            modelBuilder.Entity("SP23.P03.Web.Features.TripStations.TripStation", b =>
+                {
+                    b.HasOne("SP23.P03.Web.Features.TrainStations.TrainStation", "TrainStation")
+                        .WithMany()
+                        .HasForeignKey("TrainStationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SP23.P03.Web.Features.Trips.Trip", "Trip")
+                        .WithMany("TripStations")
+                        .HasForeignKey("TripId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TrainStation");
+
+                    b.Navigation("Trip");
+                });
+
+            modelBuilder.Entity("SP23.P03.Web.Features.Trips.Trip", b =>
+                {
+                    b.HasOne("SP23.P03.Web.Features.Routes.Route", "Route")
+                        .WithMany()
+                        .HasForeignKey("RouteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SP23.P03.Web.Features.Trains.Train", "Train")
+                        .WithMany()
+                        .HasForeignKey("TrainId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Route");
+
+                    b.Navigation("Train");
+                });
+
             modelBuilder.Entity("SP23.P03.Web.Features.Authorization.Role", b =>
                 {
                     b.Navigation("Users");
@@ -408,6 +556,11 @@ namespace SP23.P03.Web.Migrations
                     b.Navigation("ManageStations");
 
                     b.Navigation("Roles");
+                });
+
+            modelBuilder.Entity("SP23.P03.Web.Features.Trips.Trip", b =>
+                {
+                    b.Navigation("TripStations");
                 });
 #pragma warning restore 612, 618
         }

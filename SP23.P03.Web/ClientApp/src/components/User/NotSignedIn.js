@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Image } from "react-bootstrap";
 import person from './person.svg'
 import Tooltip from "react-bootstrap/Tooltip";
@@ -6,8 +6,8 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import AuthContext from "../../context/AuthProvider";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 function NotSignedIn() {
     
     const toolTip = (props) => (
@@ -19,8 +19,8 @@ function NotSignedIn() {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    // @ts-ignore
-    const { setAuth } = useContext(AuthContext);
+    //const [user, setUser] = useState();
+    const navigate = useNavigate();
     async function submitHandler(e) {
       e.preventDefault();
       
@@ -28,11 +28,18 @@ function NotSignedIn() {
         const password = e.target.password.value;
         console.log(username, password);
         await axios.post("/api/authentication/login", {username, password})
-        .then((response) => {console.log(response.data, response.status)})
+      //  .then((response) => {console.log(response.data, response.status)})
+        .then(function(response) {
+          if (response.status === 200) {
+            console.log("It's 200");
+            //setUser(response.data);
+            localStorage.setItem("user", JSON.stringify(response.data));
+            console.log(response.data);
+            navigate("/profile");
+            window.location.reload();
+          }
+        })
         .catch((err) => {console.log(err)});
-        setAuth({ username, password });
-     
-      
     }
     return (
       <div>

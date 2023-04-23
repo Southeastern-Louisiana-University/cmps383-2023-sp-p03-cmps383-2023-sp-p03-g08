@@ -1,6 +1,9 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { Card, Button } from "react-bootstrap";
+import Card from "react-bootstrap/Card";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col"
 import Loading from "../../components/Loading";
 
 function GetStations() {
@@ -9,32 +12,34 @@ function GetStations() {
     useEffect(() => {
         axios.get("api/stations").then((response) => {
             setStation(response.data)
+            console.log(response.data);
         }).catch((err) => {console.log(err)})
     }, [])
     return (
-        <div>
+        <Container>
+            <Row>
             {stations ? (
                 stations.map((station) => {
                     return (
-                        <>
-                        <Card style={{ width: '20rem' }}>
+                        <Col className="d-flex justify-content-center">
+                        <Card style={{ width: '15rem', height: '18rem', margin: '7px'}} key={station.id}>
                         <Card.Img variant="top" src={img} />
                         <Card.Body>
                             <Card.Title>{station.name}</Card.Title>
                             <Card.Text>
-                                 {station.address + ", " + station.city + ", " + station.state}
+                                 {station.address}<br/>
+                                 {station.city + ", " + station.state}
                             </Card.Text>
-                            <Button variant="primary">Go somewhere</Button>
                         </Card.Body>
                         </Card>
-                        <br/>
-                        </>
+                        </Col>
                     )
                 })
             ) : (
                 <Loading/>
             )}
-        </div>
+            </Row>
+        </Container>
     );
 }
 

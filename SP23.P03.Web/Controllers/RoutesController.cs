@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
@@ -27,9 +28,10 @@ public class RoutesController : ControllerBase
     }
 
     [HttpGet]
-    public IQueryable<RouteDto> GetRoutes()
+    public IQueryable<RouteAndStationsDto> GetRoutes()
     {
-        return GetRouteDtos(routes);
+        // return GetRouteDtos(routes);
+        return GetRouteAndStationsDtos(routes);
     }
 
     [HttpGet("{id}")]
@@ -101,30 +103,64 @@ public class RoutesController : ControllerBase
         };
         return Ok(returnroute);
     }
-    [HttpPut("{routeid}/addstations")]
+    [HttpPut("{routeid}/addstations/{stationid}")]
     [Authorize(Roles = RoleNames.Admin)]
     public ActionResult AddStationsToRoute(int routeid, int stationid) 
     {
-        var routetoedit = routes.FirstOrDefault(x => x.Id == routeid);
+        var routetoedit = routes.Include(r => r.TrainStations).FirstOrDefault(x => x.Id == routeid);
         if (routetoedit == null)
         {
-            return NotFound();
+            return NotFound("Route doesn't exist.");
         }
         var stationtoadd = trainStations.FirstOrDefault(x => x.Id == stationid);
         if (stationtoadd == null)
         {
-            return NotFound();
+            return NotFound("Station doesn't exist");
         }
-        //make sure station isn't already in route (RouteTrainStation composite key would reject as well)
-        var stationinroute = routetoedit.TrainStations.Find(x => x.Id == stationtoadd.Id);
-        if (stationinroute != null) //this didn't catch the constraint? Try to find by name?
+        //make sure station isn't already in route (RouteTrainStation composite key would reject as well, but catch the error)
+        var stationinroute = routetoedit.TrainStations.FirstOrDefault(x => x.Id == stationtoadd.Id);
+        if ((stationinroute != default) || (stationinroute != null)) //if it has been found
         {
             return BadRequest("Station already in the route.");
         }
+
         routetoedit.TrainStations.Add(stationtoadd);
         dataContext.SaveChanges();
-        var resultofadd = GetRouteAndStationsDtos(routes.Where(x => x.Id == routetoedit.Id)).FirstOrDefault();
-        return Ok(resultofadd);
+        //var resultofadd = GetRouteAndStationsDtos(routes.Where(x => x.Id == routetoedit.Id)).FirstOrDefault();
+        //return Ok(resultofadd);
+        return Ok();
+    }
+
+    [HttpDelete("{id}")]
+    [Authorize(Roles = RoleNames.Admin)]
+    public ActionResult DeleteRoute(int id) //works
+    {
+        var routetodelete = routes.FirstOrDefault(x => x.Id == id);
+        if (routetodelete == null)
+        {
+            return NotFound("Route doesn't exist.");
+        }
+        routes.Remove(routetodelete);
+        dataContext.SaveChanges();
+        return Ok();
+    }
+    [HttpDelete("{routeid}/deletestations/{stationid}")]
+    [Authorize(Roles = RoleNames.Admin)]
+    public ActionResult DeleteStationFromRoute(int routeid, int stationid)
+    {
+        var routetoedit = routes.Include(r => r.TrainStations).FirstOrDefault(x => x.Id == routeid);
+        if (routetoedit == null)
+        {
+            return NotFound("Route doesn't exist.");
+        }
+        var stationtoremove = routetoedit.TrainStations.FirstOrDefault(x => x.Id == stationid);
+        if (stationtoremove == null)
+        {
+            return NotFound("Train station specified is not in the route.");
+        }
+        routetoedit.TrainStations.Remove(stationtoremove);
+        dataContext.SaveChanges();
+        return Ok();
     }
 
     private bool IsInvalid(RouteDto dto)
@@ -154,7 +190,15 @@ public class RoutesController : ControllerBase
             Name = x.Name,
             Description = x.Description,
             Order = x.Order,
-            TrainStations = x.TrainStations //works but exposes too much info. need dto
+            TrainStations = x.TrainStations.Select(x => new TrainStationDto
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Address = x.Address,
+                City = x.City,
+                State = x.State,
+                ManagerId = x.ManagerId
+            }).ToList()
         });
     }
 }

@@ -24,7 +24,7 @@ public class StationsController : ControllerBase
     [HttpGet]
     public IQueryable<TrainStationDto> GetAllStations()
     {
-        return GetTrainStationDtos(stations);
+        return GetTrainStationDtos(stations.OrderBy(x => x.State));
     }
 
     [HttpGet]

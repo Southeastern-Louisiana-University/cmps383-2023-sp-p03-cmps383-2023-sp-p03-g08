@@ -4,7 +4,7 @@ import GetStations from "./GetStations";
 function TrainStations() {
     return (
       <Container className="text-center">
-            <h1>Train Stations</h1>
+            <h1>Our Stations</h1>
             <GetStations/>
       </Container>
     );
