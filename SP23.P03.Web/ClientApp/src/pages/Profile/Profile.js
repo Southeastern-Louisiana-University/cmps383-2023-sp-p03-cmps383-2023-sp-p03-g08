@@ -8,7 +8,7 @@ import Placeholder from "../../components/Placeholder";
 import profileperson from "./profileperson.svg";
 import Card from "react-bootstrap/Card";
 import ticket from "./ticket.svg";
-import barcode from "./barcode.jpg";
+import GetTickets from "./GetTickets";
 function Profile() {
     const currentUser = AuthService.getCurrentUser();
     const navigate = useNavigate();
@@ -43,28 +43,15 @@ function Profile() {
             <Card.Body>
                 <img src={profileperson} alt="profileperson" style={{marginBottom: '20px'}}/>
                 <Card.Title><h2>Greetings, {currentUser.userName}</h2></Card.Title>
-                <h5>{currentUser.roles}</h5>
-                <h5>{currentUser.id}</h5>
                 <Card.Text>
                   <h5>
                     <img src={ticket} alt="ticket" style={{marginRight: '10px'}}/>
                     Your Booked Tickets
                   </h5> 
                 </Card.Text>
-                <Card style={{ width: '18rem', padding: '10px'}}>
-                    <Card.Header>Ticket #57244</Card.Header>
-                    <Card.Body>
-                        <Card.Text>
-                            Date Booked: 05/20/23<br/>
-                            From: Hammond, LA - 05/30/23<br/>
-                            To: Houston, TX - 05/30/23<br/>
-                            Train: Siemens Charger #5<br/>
-                            Seat: Coach<br/>
-                            $150 <br/>
-                            <img src={barcode} alt="ticket" width="125px" height="70px" style={{margin: '10px'}}/>
-                        </Card.Text>
-                    </Card.Body>
-                </Card>
+               <>
+                <GetTickets userId={currentUser.id}/>
+               </>
                 <Button variant="danger" onClick={logOut} style={{marginTop: '20px'}}>Log Out</Button>
             </Card.Body>
         </Card>
