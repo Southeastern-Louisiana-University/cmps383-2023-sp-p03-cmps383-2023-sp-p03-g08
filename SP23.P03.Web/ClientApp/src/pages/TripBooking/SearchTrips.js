@@ -9,9 +9,17 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Accordion from 'react-bootstrap/Accordion';
 import Badge from 'react-bootstrap/Badge';
-//import { useNavigate } from "react-router-dom";
-function SearchTrips({searchtrips}) {
-  //  const navigate = useNavigate();
+import { useState } from "react";
+//import Modal from "react-bootstrap/Modal";
+import BookingModal from "./BookingModal";
+function SearchTrips({searchtrips, deploc, depdate, arrloc, arrdate}) {
+   /* const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);*/
+
+   /* function pay(searchtrip) {
+        setShow(true);
+    }*/
     function convertTime(militarytime) {
         var time = militarytime.split(":");
         var hours = time[0];
@@ -21,9 +29,6 @@ function SearchTrips({searchtrips}) {
         timeValue += (hours >= 12) ? " PM" : " AM";
         return timeValue;
     }
-    /*function navtest() {
-        navigate("/");
-    }*/
     function tripStations(obj) {
         var ts = [];
         for (let i = 0; i < obj.length; i++) {
@@ -31,12 +36,15 @@ function SearchTrips({searchtrips}) {
         }
         return ts;
     }
+    var seat;
+    var price;
     return (
+        <>
         <Container>
             {searchtrips ? (
                 searchtrips.map((searchtrip) => {
                     return (
-                        <Card key={searchtrip.id} /*onClick={() => navtest()}*/>
+                        <Card key={searchtrip.id}>
                             <Card.Body>
                                 <Card.Title>Travelling the {searchtrip.routeName} Route </Card.Title>
                                 <Card.Text className="text-start">
@@ -44,7 +52,10 @@ function SearchTrips({searchtrips}) {
                                     <Row>
                                         <Col>{searchtrip.coachSeatsLeft > 0 ? 
                                               <div><h5>Coach</h5>
-                                                <Button>Book</Button>
+                                                <BookingModal 
+                                                deploc={deploc} depdate={depdate} 
+                                                arrloc={arrloc} arrdate={arrdate}
+                                                searchtrip={searchtrip}/>
                                               </div> : 
                                               <div><h5><s>Coach</s></h5>
                                               <Button disabled>Book</Button>
@@ -96,7 +107,8 @@ function SearchTrips({searchtrips}) {
                 <Loading/>
             )}
         </Container>
+        </>
     );
 }
 
-export default SearchTrips
+export default SearchTrips;

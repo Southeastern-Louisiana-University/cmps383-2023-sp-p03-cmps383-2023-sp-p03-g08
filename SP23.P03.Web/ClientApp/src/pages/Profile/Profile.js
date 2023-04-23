@@ -44,6 +44,7 @@ function Profile() {
                 <img src={profileperson} alt="profileperson" style={{marginBottom: '20px'}}/>
                 <Card.Title><h2>Greetings, {currentUser.userName}</h2></Card.Title>
                 <h5>{currentUser.roles}</h5>
+                <h5>{currentUser.id}</h5>
                 <Card.Text>
                   <h5>
                     <img src={ticket} alt="ticket" style={{marginRight: '10px'}}/>

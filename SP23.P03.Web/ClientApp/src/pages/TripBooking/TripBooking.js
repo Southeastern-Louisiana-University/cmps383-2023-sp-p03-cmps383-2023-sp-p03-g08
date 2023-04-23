@@ -11,6 +11,11 @@ import SearchTrips from "./SearchTrips";
 import {useState} from "react";
 function Tickets() {
     const [searchtrips, setSearchTrips] = useState();
+
+    const [deploc, setDepLoc] = useState();
+    const [depdate, setDepDate] = useState();
+    const [arrloc, setArrLoc] = useState();
+    const [arrdate, setArrDate] = useState();
     async function getSearchTrips(e) {
         e.preventDefault();
         const departlocation = e.target.departlocation.value;
@@ -28,6 +33,14 @@ function Tickets() {
                 console.log("It's 200");
                 console.log(response.data);
                 setSearchTrips(response.data);
+                setDepLoc(departlocation);
+                console.log(deploc);
+                setDepDate(departdate);
+                console.log(depdate);
+                setArrLoc(arrivallocation);
+                console.log(arrloc)
+                setArrDate(arrivaldate);
+                console.log(arrdate);
             }
         }).catch((err) => {console.log(err)});
     }
@@ -82,7 +95,8 @@ function Tickets() {
             <Button type="submit" style={{margin: '15px'}} size="lg">
                 <img src={magglass} alt="glass" style={{paddingRight: '10px'}}/>Search</Button>
             </Form>
-            {searchtrips ? <SearchTrips searchtrips={searchtrips} /> : null}
+            {searchtrips ? <SearchTrips searchtrips={searchtrips} deploc={deploc} depdate={depdate}
+            arrloc={arrloc} arrdate={arrdate}/> : null}
         </Container>
     );
 }

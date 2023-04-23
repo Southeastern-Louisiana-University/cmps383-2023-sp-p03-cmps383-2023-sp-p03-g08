@@ -6,6 +6,7 @@ using SP23.P03.Web.Features.Trains;
 using Route = SP23.P03.Web.Features.Routes.Route;
 using SP23.P03.Web.Features.Trips;
 using SP23.P03.Web.Features.TripStations;
+using SP23.P03.Web.Features.Tickets;
 
 namespace SP23.P03.Web.Data;
 
@@ -25,6 +26,8 @@ public static class SeedHelper
         await AddRoutes(dataContext);
         await AddRouteTrainStations(dataContext);
         await AddTrips(dataContext);
+        await AddTrips(dataContext);
+        await AddTickets(dataContext);
 
     }
 
@@ -608,6 +611,29 @@ public static class SeedHelper
             State = ts8.State,
             ArrivalDate = "2023-05-21",
             ArrivalTime = "1:00"
+        });
+
+        await dataContext.SaveChangesAsync();
+    }
+
+    private static async Task AddTickets(DataContext dataContext)
+    {
+        var tickets = dataContext.Set<Ticket>();
+        if (await tickets.AnyAsync())
+        {
+            return;
+        }
+
+        tickets.Add(new Ticket
+        {
+            TripId = 1,
+            UserId = 2,
+            Price = 270,
+            SeatType = "First Class",
+            DepartLocation = "Baton Rouge",
+            DepartDate = "2023-06-01",
+            ArrivalLocation = "Houston",
+            ArrivalDate = "2023-06-01"
         });
 
         await dataContext.SaveChangesAsync();
