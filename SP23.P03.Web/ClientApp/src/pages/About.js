@@ -1,11 +1,43 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import Placeholder from "../components/Placeholder";
+import video from "../pages/Trips/383 Images/rails-3639.mp4";
+import train from "../pages/Trips/383 Images/train3.png";
+import "../pages/Trips/Home.css";
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import "../pages/Trips/Home.css"
+
+
 function About() {
     return (
         <Container className="text-center">
             <h1>About Us</h1>
-            <Placeholder />
+           
+
+            <Container>
+                <Row>
+                    <Col>
+                        <div class="flex-container">
+                            <div>Contact:9853835555
+                                Email:383@selu.edu              </div>
+                        </div>
+
+                    </Col>
+                    <Col>
+                        <div className="homeImages flex">
+                            <div className="videoDiv">
+                                <video src={video} autoPlay muted loop className='video'></video>
+                            </div>
+
+
+
+                            <img src={train} className='train' />
+                        </div>
+                    </Col>
+                </Row>
+
+            </Container>
+
         </Container>
     );
 }

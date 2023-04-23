@@ -66,7 +66,6 @@ function NavBar() {
                 <Nav.Link as={Link} to={"/trips"}>Departures</Nav.Link>
                 <Nav.Link as={Link} to={"/trains"}>Trains</Nav.Link>
                 <Nav.Link as={Link} to={"/prices"}>Seating/Prices</Nav.Link>
-                <Nav.Link as={Link} to={"/about"}>About Us</Nav.Link>
                 </Nav>
               </Offcanvas.Body>
             </Offcanvas>
