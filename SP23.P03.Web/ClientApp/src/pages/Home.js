@@ -18,10 +18,10 @@ function Home() {
     return (
        <Container className="text-center">
             <h1>Welcome to EnTrack!</h1>
-            <Carousel variant="dark">
+            <Carousel className="size" variant="dark">
       <Carousel.Item>
                     <img
-                        className="d-block w-100"
+                        className="size"
                         src={image1}
           alt="First slide"
         />
@@ -32,7 +32,7 @@ function Home() {
       </Carousel.Item>
       <Carousel.Item>
                     <img
-                        className="d-block w-100"
+                        className="size"
                         src={image2}
           alt="Second slide"
         />
@@ -43,7 +43,7 @@ function Home() {
       </Carousel.Item>
       <Carousel.Item>
                     <img
-                        className="d-block w-100"
+                        className="size"
                         src={image4}
           alt="Third slide"
         />
