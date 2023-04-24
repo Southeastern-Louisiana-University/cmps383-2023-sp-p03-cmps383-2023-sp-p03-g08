@@ -54,6 +54,7 @@ function BookingModal({deploc, depdate, arrloc, arrdate, searchtrip}) {
       }, (error) => {
           console.log(error.text);
       });
+      navigate("/profile");
   }
 
   return (

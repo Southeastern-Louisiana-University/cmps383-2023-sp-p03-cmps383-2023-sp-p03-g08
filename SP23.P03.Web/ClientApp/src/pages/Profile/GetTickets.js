@@ -4,6 +4,7 @@ import axios from "axios";
 import barcode from "./barcode.jpg";
 import Card from "react-bootstrap/Card";
 import Loading from "../../components/Loading";
+import Container from "react-bootstrap/Container";
 
 function GetTickets({userId}) {
     const [tickets, setTicket] = useState();
@@ -15,6 +16,7 @@ function GetTickets({userId}) {
     }, [userId])
     return (
         <>
+        <Container className="d-flex justify-content-center">
         {tickets ? (
             tickets.map((ticket) => {
                 return (
@@ -34,6 +36,7 @@ function GetTickets({userId}) {
                 )
             })
         ) : (<Loading/>) }
+        </Container>
         </>
     );
 }
